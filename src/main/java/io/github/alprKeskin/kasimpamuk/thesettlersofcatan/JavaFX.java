@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -52,26 +54,49 @@ public class JavaFX extends Application {
         stage.setScene(new Scene(pane, 300, 200));
         stage.show();
 
-        BorderPane bpane = new BorderPane();
-        bpane.setTop(new CustomPane("Top"));
-        bpane.setRight(new CustomPane("Right"));
-        bpane.setBottom(new CustomPane("Bottom"));
-        bpane.setLeft(new CustomPane("Left"));
-        bpane.setCenter(new CustomPane("Center"));
+        MyPolygon polygon = new MyPolygon();
 
-        Scene scene2 = new Scene(bpane);
+
+
+        Scene scene2 = new Scene(polygon, 200, 200);
         Stage stage2 = new Stage();
-        stage2.setTitle("ShowBorderPane");
+        stage2.setTitle("Polygon");
         stage2.setScene(scene2);
         stage2.show();
 
+
     }
 
-    class CustomPane extends StackPane {
-        public CustomPane(String title) {
-            getChildren().add(new Label(title));
-            setStyle("-fx-border-color: red");
-            setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+    class MyPolygon extends Pane {
+        private void paint() {
+            Polygon polygon = new Polygon();
+            polygon.setFill(Color.GOLD);
+            polygon.setStroke(Color.BLACK);
+            ObservableList<Double> list = polygon.getPoints();
+
+            double centerX = getWidth() / 2, centerY = getHeight() / 2;
+            double radius = Math.min(getWidth(), getHeight()) * 0.4;
+
+            for (int i = 0; i < 6; i++) {
+                list.add(centerX + radius * Math.cos(2 * i * Math.PI / 6));
+                list.add(centerY - radius * Math.sin(2 * i * Math.PI / 6));
+            }
+
+            getChildren().clear();
+            getChildren().add(polygon);
+
+        }
+
+        @Override
+        public void setWidth(double width) {
+            super.setWidth(width);
+            paint();
+        }
+
+        @Override
+        public void setHeight(double height) {
+            super.setHeight(height);
+            paint();
         }
     }
 
