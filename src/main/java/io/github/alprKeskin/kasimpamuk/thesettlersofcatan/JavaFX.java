@@ -49,26 +49,113 @@ public class JavaFX extends Application {
         GridPane.setHalignment(btAdd, HPos.RIGHT);
 
 
-        Stage stage = new Stage();
-        stage.setTitle("Register User");
-        stage.setScene(new Scene(pane, 300, 200));
-        stage.show();
+        Stage register_st = new Stage();
+        register_st.setTitle("Register User");
+        register_st.setScene(new Scene(pane, 300, 200));
+        register_st.show();
 
-        MyPolygon polygon = new MyPolygon();
+/*
+        int height = 400;
+        int width = 400;
+        AnchorPane tileMap = new AnchorPane();
+        Scene content = new Scene(tileMap, width, height);
+        Stage stage3 = new Stage();
+        stage3.setScene(content);
+        double size = 50,v=Math.sqrt(3)/2.0;
+        for(double y=50;y<width;y+=size*Math.sqrt(3)) // x and y are interchanged
+        {
+            for(double x=50,dy=y;x<height;x+=(3.0/2.0)*size)
+            {
+                Polygon tile = new Polygon();
+                tile.getPoints().addAll(new Double[]{
+                        dy,x,
+                        dy,x+size,
+                        dy+size*v,x+size*(3.0/2.0),
+                        dy+size*Math.sqrt(3),x+size,
+                        dy+size*Math.sqrt(3),x,
+                       dy+size*v, x-(size/2.0)
+                });
+                tile.setFill(Color.GOLD);
+                tile.setStrokeWidth(2);
+                tile.setStroke(Color.BLACK );
+                tileMap.getChildren().add(tile);
+                dy = dy==y ? dy+size*v : y;
+            }
+        }
+        stage3.show();
+
+*/
 
 
+        int height = 500;
+        int width = 500;
+        Stage board = new Stage();
+        AnchorPane tileMap = new AnchorPane();
+        Scene catan_board = new Scene(tileMap, width, height);
+        double board_centerx = tileMap.getWidth()/2;
+        double board_centery = tileMap.getHeight()/2;
+        board.setTitle("Catan Board");
+        board.setScene(catan_board);
+        double size = 50,v=Math.sqrt(3)/2.0;
+        for(double y=-1;y<2;y++)
+        {
+            double centery= board_centery + y*size*3;
 
-        Scene scene2 = new Scene(polygon, 200, 200);
-        Stage stage2 = new Stage();
-        stage2.setTitle("Polygon");
-        stage2.setScene(scene2);
-        stage2.show();
+            double centerx= board_centerx;
 
+            for(double x=-2;x<3;x++)
+            {
+                if(((y==-1 || y==1) && (x==-2 || x==2)))
+                    continue;
+
+                centerx=board_centerx+x*size*Math.sqrt(3);
+                Polygon tile = new Polygon();
+                tile.getPoints().addAll(new Double[]{
+                        centerx-v*size,centery+size/2,
+                        centerx-v*size,centery-size/2,
+                        centerx,centery-size,
+                        centerx+v*size,centery-size/2,
+                        centerx+v*size,centery+size/2,
+                        centerx,centery+size
+                });
+                tile.setFill(Color.GOLD);
+                tile.setStrokeWidth(2);
+                tile.setStroke(Color.BLACK );
+                tileMap.getChildren().add(tile);
+            }
+        }
+        board_centerx = board_centerx -  size*v;
+        double centerx, centery;
+        for(int x=-1; x<3; x++){
+            centerx= board_centerx + x*size*Math.sqrt(3);
+            for(int y=-1; y<2;y+=2){
+                centery= board_centery + y*size*3/2;
+                Polygon tile = new Polygon();
+                tile.getPoints().addAll(new Double[]{
+                        centerx-v*size,centery+size/2,
+                        centerx-v*size,centery-size/2,
+                        centerx,centery-size,
+                        centerx+v*size,centery-size/2,
+                        centerx+v*size,centery+size/2,
+                        centerx,centery+size
+                });
+                tile.setFill(Color.GOLD);
+                tile.setStrokeWidth(2);
+                tile.setStroke(Color.BLACK );
+                tileMap.getChildren().add(tile);
+
+            }
+        }
+        board.show();
 
     }
 
+}
+
+
+/*
     class MyPolygon extends Pane {
-        private void paint() {
+        private void paint(double size) {
             Polygon polygon = new Polygon();
             polygon.setFill(Color.GOLD);
             polygon.setStroke(Color.BLACK);
@@ -77,11 +164,13 @@ public class JavaFX extends Application {
             double centerX = getWidth() / 2, centerY = getHeight() / 2;
             double radius = Math.min(getWidth(), getHeight()) * 0.4;
 
+            double[] points = new double[12];
             for (int i = 0; i < 6; i++) {
-                list.add(centerX + radius * Math.cos(2 * i * Math.PI / 6));
-                list.add(centerY - radius * Math.sin(2 * i * Math.PI / 6));
+                points[i * 2] = size * Math.cos(i * 2 * Math.PI / 6);
+                points[i * 2 + 1] = size * Math.sin(i * 2 * Math.PI / 6);
+                list.add(points[i * 2]);
+                list.add(points[i * 2 + 1]);
             }
-
             getChildren().clear();
             getChildren().add(polygon);
 
@@ -90,15 +179,13 @@ public class JavaFX extends Application {
         @Override
         public void setWidth(double width) {
             super.setWidth(width);
-            paint();
+            paint(20.0);
         }
 
         @Override
         public void setHeight(double height) {
             super.setHeight(height);
-            paint();
+            paint(20.0);
         }
     }
-
-    // You may add other JavaFX-specific methods or components here
-}
+    */
