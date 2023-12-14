@@ -18,9 +18,52 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class JavaFX extends Application {
+    private Color getTerrainColor(String terrain) {
+        return switch (terrain) {
+            case "desert" -> Color.BEIGE;
+            case "hills" -> Color.BROWN;
+            case "mountains" -> Color.GRAY;
+            case "forest" -> Color.GREEN;
+            case "fields" -> Color.YELLOW;
+            case "pasture" -> Color.LIGHTGREEN;
+            default -> Color.WHITE;
+        };
+    }
 
+    private ArrayList<String> createTerrainList() {
+        ArrayList<String> terrains = new ArrayList<>();
+        terrains.add("desert"); // 1 desert
+        for (int i = 0; i < 3; i++) {
+            terrains.add("hills"); // 3 hills
+            terrains.add("mountains"); // 3 mountains
+        }
+        for (int i = 0; i < 4; i++) {
+            terrains.add("forest"); // 4 forests
+            terrains.add("fields"); // 4 fields
+            terrains.add("pasture"); // 4 pastures
+        }
+        Collections.shuffle(terrains);
+        return terrains;
+    }
+    private Polygon createHexagon(double centerx, double centery, double size) {
+        double v = Math.sqrt(3) / 2.0;
+        Polygon hexagon = new Polygon();
+        hexagon.getPoints().addAll(new Double[]{
+                centerx - v * size, centery + size / 2,
+                centerx - v * size, centery - size / 2,
+                centerx, centery - size,
+                centerx + v * size, centery - size / 2,
+                centerx + v * size, centery + size / 2,
+                centerx, centery + size
+        });
+        hexagon.setStrokeWidth(2);
+        hexagon.setStroke(Color.BLACK);
+        return hexagon;
+    }
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
@@ -86,6 +129,9 @@ public class JavaFX extends Application {
 
 */
 
+        ArrayList<String> terrains = createTerrainList();
+        int terrainIndex = 0;
+
 
         int height = 500;
         int width = 500;
@@ -109,18 +155,9 @@ public class JavaFX extends Application {
                     continue;
 
                 centerx=board_centerx+x*size*Math.sqrt(3);
-                Polygon tile = new Polygon();
-                tile.getPoints().addAll(new Double[]{
-                        centerx-v*size,centery+size/2,
-                        centerx-v*size,centery-size/2,
-                        centerx,centery-size,
-                        centerx+v*size,centery-size/2,
-                        centerx+v*size,centery+size/2,
-                        centerx,centery+size
-                });
-                tile.setFill(Color.GOLD);
-                tile.setStrokeWidth(2);
-                tile.setStroke(Color.BLACK );
+                String terrain = terrains.get(terrainIndex++);
+                Polygon tile = createHexagon(centerx, centery, size);
+                tile.setFill(getTerrainColor(terrain));
                 tileMap.getChildren().add(tile);
             }
         }
@@ -130,26 +167,16 @@ public class JavaFX extends Application {
             centerx= board_centerx + x*size*Math.sqrt(3);
             for(int y=-1; y<2;y+=2){
                 centery= board_centery + y*size*3/2;
-                Polygon tile = new Polygon();
-                tile.getPoints().addAll(new Double[]{
-                        centerx-v*size,centery+size/2,
-                        centerx-v*size,centery-size/2,
-                        centerx,centery-size,
-                        centerx+v*size,centery-size/2,
-                        centerx+v*size,centery+size/2,
-                        centerx,centery+size
-                });
-                tile.setFill(Color.GOLD);
-                tile.setStrokeWidth(2);
-                tile.setStroke(Color.BLACK );
+                String terrain = terrains.get(terrainIndex++);
+                Polygon tile = createHexagon(centerx, centery, size);
+                tile.setFill(getTerrainColor(terrain));
                 tileMap.getChildren().add(tile);
 
             }
         }
+
         board.show();
-
     }
-
 }
 
 
