@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class JavaFX extends Application {
@@ -36,7 +37,6 @@ public class JavaFX extends Application {
 
     private ArrayList<String> createTerrainList() {
         ArrayList<String> terrains = new ArrayList<>();
-        terrains.add("desert"); // 1 desert
         for (int i = 0; i < 3; i++) {
             terrains.add("hills"); // 3 hills
             terrains.add("mountains"); // 3 mountains
@@ -48,6 +48,16 @@ public class JavaFX extends Application {
         }
         Collections.shuffle(terrains);
         return terrains;
+    }
+    private ArrayList<Integer> createNumberList() {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.addAll(Arrays.asList(2, 12)); // One each of 2, 3, 11, and 12
+        for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) { // Two each of 4, 5, 6, 8, 9, and 10
+            numbers.add(number);
+            numbers.add(number);
+        }
+        Collections.shuffle(numbers);
+        return numbers;
     }
     private Polygon createHexagon(double centerx, double centery, double size) {
         double v = Math.sqrt(3) / 2.0;
@@ -130,8 +140,9 @@ public class JavaFX extends Application {
 */
 
         ArrayList<String> terrains = createTerrainList();
+        ArrayList<Integer> numbers = createNumberList();
         int terrainIndex = 0;
-
+        int numberIndex = 0;
 
         int height = 500;
         int width = 500;
@@ -143,22 +154,36 @@ public class JavaFX extends Application {
         board.setTitle("Catan Board");
         board.setScene(catan_board);
         double size = 50,v=Math.sqrt(3)/2.0;
+        int number;
+
         for(double y=-1;y<2;y++)
         {
             double centery= board_centery + y*size*3;
-
             double centerx= board_centerx;
-
             for(double x=-2;x<3;x++)
             {
                 if(((y==-1 || y==1) && (x==-2 || x==2)))
                     continue;
 
                 centerx=board_centerx+x*size*Math.sqrt(3);
-                String terrain = terrains.get(terrainIndex++);
-                Polygon tile = createHexagon(centerx, centery, size);
-                tile.setFill(getTerrainColor(terrain));
-                tileMap.getChildren().add(tile);
+                String terrain;
+                if(y==0 && x==0) {
+                    terrain = "desert";
+                    Polygon tile = createHexagon(centerx, centery, size);
+                    tile.setFill(getTerrainColor(terrain));
+                    tileMap.getChildren().add(tile);
+                }
+                else{
+                    terrain = terrains.get(terrainIndex++);
+                    number = numbers.get(numberIndex++);
+                    Text numberText = new Text(String.valueOf(number));
+                    numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
+                    numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
+                    Polygon tile = createHexagon(centerx, centery, size);
+                    tile.setFill(getTerrainColor(terrain));
+                    tileMap.getChildren().add(tile);
+                    tileMap.getChildren().add(numberText);
+                }
             }
         }
         board_centerx = board_centerx -  size*v;
@@ -168,9 +193,14 @@ public class JavaFX extends Application {
             for(int y=-1; y<2;y+=2){
                 centery= board_centery + y*size*3/2;
                 String terrain = terrains.get(terrainIndex++);
+                number = numbers.get(numberIndex++);
+                Text numberText = new Text(String.valueOf(number));
+                numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
+                numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
                 Polygon tile = createHexagon(centerx, centery, size);
                 tile.setFill(getTerrainColor(terrain));
                 tileMap.getChildren().add(tile);
+                tileMap.getChildren().add(numberText);
 
             }
         }
