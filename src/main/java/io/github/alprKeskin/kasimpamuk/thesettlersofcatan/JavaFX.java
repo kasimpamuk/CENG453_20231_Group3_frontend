@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -23,18 +24,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class JavaFX extends Application {
-    private Color getTerrainColor(String terrain) {
-        return switch (terrain) {
-            case "desert" -> Color.BEIGE;
-            case "hills" -> Color.BROWN;
-            case "mountains" -> Color.GRAY;
-            case "forest" -> Color.GREEN;
-            case "fields" -> Color.YELLOW;
-            case "pasture" -> Color.LIGHTGREEN;
-            default -> Color.WHITE;
-        };
-    }
-
     private ArrayList<String> createTerrainList() {
         ArrayList<String> terrains = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -59,34 +48,9 @@ public class JavaFX extends Application {
         Collections.shuffle(numbers);
         return numbers;
     }
-    private Polygon createHexagon(double centerx, double centery, double size) {
-        double v = Math.sqrt(3) / 2.0;
-        Polygon hexagon = new Polygon();
-        hexagon.getPoints().addAll(new Double[]{
-                centerx - v * size, centery + size / 2,
-                centerx - v * size, centery - size / 2,
-                centerx, centery - size,
-                centerx + v * size, centery - size / 2,
-                centerx + v * size, centery + size / 2,
-                centerx, centery + size
-        });
-        hexagon.setStrokeWidth(2);
-        hexagon.setStroke(Color.BLACK);
-        return hexagon;
-    }
+
     @Override
     public void start(Stage primaryStage) {
-        StackPane root = new StackPane();
-        Button btn = new Button("Click me!");
-        btn.setStyle("-fx-background-color: orange; -fx-text-fill: purple;");
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 200);
-
-        primaryStage.setTitle("JavaFX Application");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(11, 12, 13, 14));
@@ -115,32 +79,32 @@ public class JavaFX extends Application {
 
         int height = 500;
         int width = 500;
-        Stage board = new Stage();
         AnchorPane tileMap = new AnchorPane();
+        tileMap.setStyle("-fx-background-color: #87CEFA;");
         Scene catan_board = new Scene(tileMap, width, height);
         double board_centerx = tileMap.getWidth()/2;
         double board_centery = tileMap.getHeight()/2;
-        board.setTitle("Catan Board");
-        board.setScene(catan_board);
-        double size = 50,v=Math.sqrt(3)/2.0;
+        primaryStage.setTitle("Catan Board");
+        primaryStage.setScene(catan_board);
+        int size = 50;
+        double v=Math.sqrt(3)/2.0;
         int number;
+        int tileIndex = 0;
 
         for(double y=-1;y<2;y++)
         {
             double centery= board_centery + y*size*3;
-            double centerx= board_centerx;
             for(double x=-2;x<3;x++)
             {
                 if(((y==-1 || y==1) && (x==-2 || x==2)))
                     continue;
 
-                centerx=board_centerx+x*size*Math.sqrt(3);
+                double centerx=board_centerx+x*size*Math.sqrt(3);
                 String terrain;
                 if(y==0 && x==0) {
                     terrain = "desert";
-                    Polygon tile = createHexagon(centerx, centery, size);
-                    tile.setFill(getTerrainColor(terrain));
-                    tileMap.getChildren().add(tile);
+                    Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, 0, size);
+                    tileMap.getChildren().add(tile.getHexagon());
                 }
                 else{
                     terrain = terrains.get(terrainIndex++);
@@ -148,9 +112,8 @@ public class JavaFX extends Application {
                     Text numberText = new Text(String.valueOf(number));
                     numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
                     numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
-                    Polygon tile = createHexagon(centerx, centery, size);
-                    tile.setFill(getTerrainColor(terrain));
-                    tileMap.getChildren().add(tile);
+                    Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, number, size);
+                    tileMap.getChildren().add(tile.getHexagon());
                     tileMap.getChildren().add(numberText);
                 }
             }
@@ -166,15 +129,14 @@ public class JavaFX extends Application {
                 Text numberText = new Text(String.valueOf(number));
                 numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
                 numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
-                Polygon tile = createHexagon(centerx, centery, size);
-                tile.setFill(getTerrainColor(terrain));
-                tileMap.getChildren().add(tile);
+                Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, number, size);
+                tileMap.getChildren().add(tile.getHexagon());
                 tileMap.getChildren().add(numberText);
 
             }
         }
 
-        board.show();
+        primaryStage.show();
     }
 }
 

@@ -1,29 +1,20 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
-import java.util.Objects;
-
+import lombok.Getter;
+@Getter
 public class Point {
-    private Double x;
-    private Double y;
-
-    public Point(Double x, Double y) {
+    private double x;
+    private double y;
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
-    }
-
-    public Double getX() {
-        return x;
     }
 
     public void setX(Double x) {
         this.x = x;
     }
 
-    public Double getY() {
-        return y;
-    }
-
-    public void setY(Double y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -33,6 +24,6 @@ public class Point {
     }
 
     public boolean equals(Point p) {
-        return (Objects.equals(this.x, p.getX()) && this.y == p.getY());
+        return (this.x == p.getX() && this.y == p.getY());
     }
 }
