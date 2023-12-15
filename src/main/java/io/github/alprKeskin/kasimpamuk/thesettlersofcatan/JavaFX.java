@@ -107,37 +107,6 @@ public class JavaFX extends Application {
         register_st.setScene(new Scene(pane, 300, 200));
         register_st.show();
 
-/*
-        int height = 400;
-        int width = 400;
-        AnchorPane tileMap = new AnchorPane();
-        Scene content = new Scene(tileMap, width, height);
-        Stage stage3 = new Stage();
-        stage3.setScene(content);
-        double size = 50,v=Math.sqrt(3)/2.0;
-        for(double y=50;y<width;y+=size*Math.sqrt(3)) // x and y are interchanged
-        {
-            for(double x=50,dy=y;x<height;x+=(3.0/2.0)*size)
-            {
-                Polygon tile = new Polygon();
-                tile.getPoints().addAll(new Double[]{
-                        dy,x,
-                        dy,x+size,
-                        dy+size*v,x+size*(3.0/2.0),
-                        dy+size*Math.sqrt(3),x+size,
-                        dy+size*Math.sqrt(3),x,
-                       dy+size*v, x-(size/2.0)
-                });
-                tile.setFill(Color.GOLD);
-                tile.setStrokeWidth(2);
-                tile.setStroke(Color.BLACK );
-                tileMap.getChildren().add(tile);
-                dy = dy==y ? dy+size*v : y;
-            }
-        }
-        stage3.show();
-
-*/
 
         ArrayList<String> terrains = createTerrainList();
         ArrayList<Integer> numbers = createNumberList();
