@@ -80,7 +80,7 @@ public class JavaFX extends Application {
         int height = 500;
         int width = 500;
         AnchorPane tileMap = new AnchorPane();
-        tileMap.setStyle("-fx-background-color: #87CEFA;");
+        tileMap.setStyle("-fx-background-color: #87CEEB;");
         Scene catan_board = new Scene(tileMap, width, height);
         double board_centerx = tileMap.getWidth()/2;
         double board_centery = tileMap.getHeight()/2;
@@ -139,41 +139,3 @@ public class JavaFX extends Application {
         primaryStage.show();
     }
 }
-
-
-/*
-    class MyPolygon extends Pane {
-        private void paint(double size) {
-            Polygon polygon = new Polygon();
-            polygon.setFill(Color.GOLD);
-            polygon.setStroke(Color.BLACK);
-            ObservableList<Double> list = polygon.getPoints();
-
-            double centerX = getWidth() / 2, centerY = getHeight() / 2;
-            double radius = Math.min(getWidth(), getHeight()) * 0.4;
-
-            double[] points = new double[12];
-            for (int i = 0; i < 6; i++) {
-                points[i * 2] = size * Math.cos(i * 2 * Math.PI / 6);
-                points[i * 2 + 1] = size * Math.sin(i * 2 * Math.PI / 6);
-                list.add(points[i * 2]);
-                list.add(points[i * 2 + 1]);
-            }
-            getChildren().clear();
-            getChildren().add(polygon);
-
-        }
-
-        @Override
-        public void setWidth(double width) {
-            super.setWidth(width);
-            paint(20.0);
-        }
-
-        @Override
-        public void setHeight(double height) {
-            super.setHeight(height);
-            paint(20.0);
-        }
-    }
-    */

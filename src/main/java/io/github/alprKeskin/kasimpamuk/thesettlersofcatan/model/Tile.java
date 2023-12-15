@@ -22,13 +22,13 @@ public class Tile {
 
     private Color getTerrainColor(String terrain) {
         return switch (terrain) {
-            case "desert" -> Color.BEIGE;
-            case "hills" -> Color.BROWN;
-            case "mountains" -> Color.GRAY;
-            case "forest" -> Color.GREEN;
-            case "fields" -> Color.YELLOW;
-            case "pasture" -> Color.LIGHTGREEN;
-            default -> Color.WHITE;
+            case "desert" -> Color.web("#e4c49f"); // A sandy beige, resembling desert sand
+            case "hills" -> Color.web("#b7410e"); // A darker earth tone, suggestive of rocky hills
+            case "mountains" -> Color.web("#708090"); // A muted grey with a hint of green, resembling mountain rock
+            case "forest" -> Color.web("#228b22"); // A deep green, representative of dense forests
+            case "fields" -> Color.web("#ffc300"); // A golden wheat color, typical of fields
+            case "pasture" -> Color.web("#7bb274"); // A fresh, vibrant green, suggestive of lush pastures
+            default -> Color.web("#ffffff"); // Pure white for undefined terrain
         };
     }
 

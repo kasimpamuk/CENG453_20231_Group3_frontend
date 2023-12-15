@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8f92681-0fd5-44c5-92d6-8dcb30f30f24" name="Changes" comment="dev: create Point and Edge classes">
+    <list default="true" id="f8f92681-0fd5-44c5-92d6-8dcb30f30f24" name="Changes" comment="dev: utilize new modular classes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/model/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/model/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/model/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +105,8 @@
       <workItem from="1701542130787" duration="109000" />
       <workItem from="1701542251247" duration="14815000" />
       <workItem from="1702561711923" duration="7280000" />
-      <workItem from="1702666313321" duration="6295000" />
+      <workItem from="1702666313321" duration="7370000" />
+      <workItem from="1702680145377" duration="126000" />
     </task>
     <task id="LOCAL-00001" summary="initialize Spring Boot project">
       <option name="closed" value="true" />
@@ -163,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702667936248</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="dev: utilize new modular classes">
+      <option name="closed" value="true" />
+      <created>1702679083235</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702679083235</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +209,8 @@
     <MESSAGE value="dev: create tile random colorization for hills, desert, mountains,forests,fields,pasture" />
     <MESSAGE value="dev: add numbers to tiles and centralize the desert" />
     <MESSAGE value="dev: create Point and Edge classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev: create Point and Edge classes" />
+    <MESSAGE value="dev: utilize new modular classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev: utilize new modular classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
