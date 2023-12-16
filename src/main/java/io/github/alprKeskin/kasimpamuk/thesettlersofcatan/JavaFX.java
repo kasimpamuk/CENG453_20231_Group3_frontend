@@ -3,6 +3,7 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.RegisterWindow;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -25,73 +26,17 @@ import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Ter
 
 public class JavaFX extends Application {
 
+    private final RegisterWindow registerWindow = new RegisterWindow();
+
     private List<Tile> tiles = new ArrayList<Tile>();
 
-    private ArrayList<Terrain> createTerrainList() {
-        ArrayList<Terrain> terrains = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            terrains.add(HILL); // 3 hills
-            terrains.add(MOUNTAIN); // 3 mountains
-        }
-        for (int i = 0; i < 4; i++) {
-            terrains.add(FOREST); // 4 forests
-            terrains.add(FIELD); // 4 fields
-            terrains.add(PASTURE); // 4 pastures
-        }
-        Collections.shuffle(terrains);
-        return terrains;
-    }
-    private ArrayList<Integer> createNumberList() {
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.addAll(Arrays.asList(2, 12)); // One each of 2, 3, 11, and 12
-        for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) { // Two each of 4, 5, 6, 8, 9, and 10
-            numbers.add(number);
-            numbers.add(number);
-        }
-        Collections.shuffle(numbers);
-        return numbers;
-    }
-    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount) {
-        ImageView imageView = new ImageView(imagePath);
-        imageView.setFitHeight(size);
-        imageView.setFitWidth(size);
-
-        Label countLabel = new Label(Integer.toString(initialCount));
-        VBox box = new VBox(5, imageView, countLabel);
-        box.setAlignment(Pos.CENTER);
-
-        return box;
-    }
     private ImageView dice1, dice2;
-    private void rollDice() {
-        Random random = new Random();
-        int diceValue1 = random.nextInt(6) + 1; // Dice values between 1 and 6
-        int diceValue2 = random.nextInt(6) + 1;
 
-        dice1.setImage(new Image("dice" + diceValue1 + ".png"));
-        dice2.setImage(new Image("dice" + diceValue2 + ".png"));
-    }
+
     @Override
     public void start(Stage primaryStage) {
-        // Register
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        pane.setPadding(new Insets(11, 12, 13, 14));
-        pane.setHgap(5);
-        pane.setVgap(5);
 
-        pane.add(new Label("Email:"), 0, 0);
-        pane.add(new TextField(), 1, 0);
-        pane.add(new Label("Password:"), 0, 1);
-        pane.add(new TextField(), 1, 1);
-        Button btAdd = new Button("Add User");
-        pane.add(btAdd, 1, 2);
-        GridPane.setHalignment(btAdd, HPos.RIGHT);
-
-        Stage register_st = new Stage();
-        register_st.setTitle("Register User");
-        register_st.setScene(new Scene(pane, 300, 200));
-        register_st.show();
+        registerWindow.displayRegisterWindow();
 
         // Game Board
         ArrayList<Terrain> terrains = createTerrainList();
@@ -165,7 +110,6 @@ public class JavaFX extends Application {
             }
         }
 
-        //ghfghf
 
         HBox resource_box = new HBox(10);
         resource_box.setAlignment(Pos.CENTER);
@@ -209,4 +153,50 @@ public class JavaFX extends Application {
 
         primaryStage.show();
     }
+
+    private ArrayList<Terrain> createTerrainList() {
+        ArrayList<Terrain> terrains = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            terrains.add(HILL); // 3 hills
+            terrains.add(MOUNTAIN); // 3 mountains
+        }
+        for (int i = 0; i < 4; i++) {
+            terrains.add(FOREST); // 4 forests
+            terrains.add(FIELD); // 4 fields
+            terrains.add(PASTURE); // 4 pastures
+        }
+        Collections.shuffle(terrains);
+        return terrains;
+    }
+    private ArrayList<Integer> createNumberList() {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.addAll(Arrays.asList(2, 12)); // One each of 2, 3, 11, and 12
+        for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) { // Two each of 4, 5, 6, 8, 9, and 10
+            numbers.add(number);
+            numbers.add(number);
+        }
+        Collections.shuffle(numbers);
+        return numbers;
+    }
+    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount) {
+        ImageView imageView = new ImageView(imagePath);
+        imageView.setFitHeight(size);
+        imageView.setFitWidth(size);
+
+        Label countLabel = new Label(Integer.toString(initialCount));
+        VBox box = new VBox(5, imageView, countLabel);
+        box.setAlignment(Pos.CENTER);
+
+        return box;
+    }
+
+    private void rollDice() {
+        Random random = new Random();
+        int diceValue1 = random.nextInt(6) + 1; // Dice values between 1 and 6
+        int diceValue2 = random.nextInt(6) + 1;
+
+        dice1.setImage(new Image("dice" + diceValue1 + ".png"));
+        dice2.setImage(new Image("dice" + diceValue2 + ".png"));
+    }
+
 }
