@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -52,17 +54,26 @@ public class JavaFX extends Application {
         Collections.shuffle(numbers);
         return numbers;
     }
-    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount) {
+    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount, String backgroundColor) {
         ImageView imageView = new ImageView(imagePath);
         imageView.setFitHeight(size);
         imageView.setFitWidth(size);
 
         Label countLabel = new Label(Integer.toString(initialCount));
+        countLabel.setFont(new Font("Arial", 20)); // Increase the font size
+        countLabel.setTextFill(Color.WHITE); // Set a text color that contrasts with the background
+        countLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 5;"); // Semi-transparent background for readability
+        countLabel.setAlignment(Pos.CENTER); // Center align the text
+
         VBox box = new VBox(5, imageView, countLabel);
         box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(10));
+        box.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
 
         return box;
     }
+
+
     private ImageView dice1, dice2;
     private void rollDice() {
         Random random = new Random();
@@ -85,7 +96,7 @@ public class JavaFX extends Application {
 
         // Initial style
         cornerButton.setStyle("-fx-background-radius: 10; " +
-                "-fx-background-color: #3cfcd6; " +
+                "-fx-background-color: orange; " +
                 "-fx-border-color: black; " +
                 "-fx-border-width: 2; " +
                 "-fx-cursor: hand;");
@@ -110,7 +121,7 @@ public class JavaFX extends Application {
             cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
             cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
             cornerButton.setStyle("-fx-background-radius: 10; " +
-                    "-fx-background-color: #3cfcd6; " +
+                    "-fx-background-color: orange; " +
                     "-fx-border-color: black; " +
                     "-fx-border-width: 2; " +
                     "-fx-cursor: hand;");
@@ -155,7 +166,6 @@ public class JavaFX extends Application {
         Pane tileMap = new Pane();
         tileMap.setStyle("-fx-background-color: #87CEEB;");
         tileMap.setPrefSize(width, height);
-        pane.setPrefSize(900, 900);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: #87CEEB;");
@@ -238,11 +248,12 @@ public class JavaFX extends Application {
         resource_box.setAlignment(Pos.CENTER);
         resource_box.setPadding(new Insets(10));
         resource_box.setStyle("-fx-background-color: #FFFD74;");
-        VBox brickBox = createResourceBox("brick.png", 50, "Brick", 0);
-        VBox grainBox = createResourceBox("grain.png", 50, "Grain", 0);
-        VBox lumberBox = createResourceBox("lumber.png", 50, "Lumber", 0);
-        VBox oreBox = createResourceBox("ore.png", 50, "Ore", 0);
-        VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0);
+        VBox brickBox = createResourceBox("brick.png", 50, "Brick", 0, "#b7410e"); // Brownish color for brick
+        VBox grainBox = createResourceBox("grain.png", 50, "Grain", 0, "#FFD700"); // Gold color for grain
+        VBox lumberBox = createResourceBox("lumber.png", 50, "Lumber", 0, "#228B22"); // Green color for lumber
+        VBox oreBox = createResourceBox("ore.png", 50, "Ore", 0, "#708090"); // Gray color for ore
+        VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0, "#B6C9A2"); // Beige color for wool
+
         resource_box.getChildren().addAll(brickBox, grainBox, lumberBox, oreBox, woolBox);
 
         HBox dice_box = new HBox(10);
