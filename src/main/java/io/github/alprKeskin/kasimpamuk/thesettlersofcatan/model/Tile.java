@@ -38,33 +38,53 @@ public class Tile {
         hexagon.setStrokeWidth(2);
         hexagon.setStroke(Color.BLACK);
         hexagon.setFill(terrain.getColor());
+    }
 
-        // Initialize corners and edges
-//        for (int i = 0; i < 6; i++) {
-//            corners[i] = new Point(hexPoints[i * 2], hexPoints[i * 2 + 1]);
-//            edges[i] = new Edge(i, corners[i], corners[(i + 1) % 6]);
-//        }
+    public Point getTopCornerPoint() {
+        return corners.get(0);
+    }
 
+    public Point getTopRightCornerPoint() {
+        return this.corners.get(1);
+    }
+
+    public Point getBottomRightCornerPoint() {
+        return this.corners.get(2);
+    }
+
+    public Point getBottomCornerPoint() {
+        return corners.get(3);
+    }
+
+    public Point getBottomLeftCornerPoint() {
+        return this.corners.get(4);
+    }
+
+    public Point getTopLeftCornerPoint() {
+        return this.corners.get(5);
     }
 
     private Double[] initializeHexagonPoints() {
         double v = Math.sqrt(3) / 2.0;
 
-        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2));
-        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2));
-        this.corners.add(new Point(center.getX(), center.getY() - (double) edgeSize));
-        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2));
-        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2));
-        this.corners.add(new Point(center.getX(), center.getY() + (double) edgeSize));
+        // v * edgeSize = merkezden kenara dik uzaklık
+
+        // Clockwise order starting from top
+        this.corners.add(new Point(center.getX(), center.getY() + (double) edgeSize)); // üst
+        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2)); // sağ üst
+        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2)); // sağ alt
+        this.corners.add(new Point(center.getX(), center.getY() - (double) edgeSize)); // alt
+        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2));// sol alt
+        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2));// sol üst
 
 
         return new Double[]{
-                center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2,
-                center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2,
-                center.getX(), center.getY() - (double) edgeSize,
-                center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2,
-                center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2,
-                center.getX(), center.getY() + (double) edgeSize
+                center.getX(), center.getY() + (double) edgeSize,// üst
+                center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2,// sağ üst
+                center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2,// sağ alt
+                center.getX(), center.getY() - (double) edgeSize,// alt
+                center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2,// sol alt
+                center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2// sol üst
         };
     }
 

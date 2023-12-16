@@ -6,11 +6,11 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class BuildingCorner {
 
     private int id;
+    private Point location;
     private Button button;
 
     public void clickAction() {
