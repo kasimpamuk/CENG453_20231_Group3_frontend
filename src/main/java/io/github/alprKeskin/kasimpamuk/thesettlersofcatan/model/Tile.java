@@ -70,21 +70,21 @@ public class Tile {
         // v * edgeSize = merkezden kenara dik uzaklık
 
         // Clockwise order starting from top
-        this.corners.add(new Point(center.getX(), center.getY() + (double) edgeSize)); // üst
-        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2)); // sağ üst
-        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2)); // sağ alt
-        this.corners.add(new Point(center.getX(), center.getY() - (double) edgeSize)); // alt
-        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2));// sol alt
-        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2));// sol üst
+        this.corners.add(new Point(center.getX(), center.getY() - (double) edgeSize)); // üst
+        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2)); // sağ üst
+        this.corners.add(new Point(center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2)); // sağ alt
+        this.corners.add(new Point(center.getX(), center.getY() + (double) edgeSize)); // alt
+        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2));// sol alt
+        this.corners.add(new Point(center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2));// sol üst
 
 
         return new Double[]{
-                center.getX(), center.getY() + (double) edgeSize,// üst
-                center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2,// sağ üst
-                center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2,// sağ alt
-                center.getX(), center.getY() - (double) edgeSize,// alt
-                center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2,// sol alt
-                center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2// sol üst
+                center.getX(), center.getY() - (double) edgeSize,// üst
+                center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2,// sağ üst
+                center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2,// sağ alt
+                center.getX(), center.getY() + (double) edgeSize,// alt
+                center.getX() - v * edgeSize, center.getY() + (double) edgeSize / 2,// sol alt
+                center.getX() - v * edgeSize, center.getY() - (double) edgeSize / 2// sol üst
         };
     }
 

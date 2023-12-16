@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
@@ -122,6 +123,10 @@ public class JavaFX extends Application {
 
         createAllCornerButtons();
 
+        // create an example road
+        tileMap.getChildren().add(createRoad(tiles.get(0).getTopLeftCornerPoint(), tiles.get(0).getTopCornerPoint()));
+
+
 
 
         HBox resource_box = new HBox(10);
@@ -168,28 +173,28 @@ public class JavaFX extends Application {
         if (tileId != -1) {
 
             Point cornerPoint;
-            if (tileId == 12) {
+            if (tileId == 11) {
                 // create only top left corner button
                 cornerPoint = tile.getTopLeftCornerPoint();
                 Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
                 this.tileMap.getChildren().add(cornerButton);
                 return;
             }
-            if (tileId == 18) {
+            if (tileId == 17) {
                 // create only top right corner button
                 cornerPoint = tile.getTopRightCornerPoint();
                 Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
                 this.tileMap.getChildren().add(cornerButton);
                 return;
             }
-            if (tileId == 11) {
+            if (tileId == 12) {
                 // create only bottom left corner button
                 cornerPoint = tile.getBottomLeftCornerPoint();
                 Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
                 this.tileMap.getChildren().add(cornerButton);
                 return;
             }
-            if (tileId == 17) {
+            if (tileId == 18) {
                 // create only bottom right corner button
                 cornerPoint = tile.getBottomRightCornerPoint();
                 Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
@@ -323,7 +328,7 @@ public class JavaFX extends Application {
 
         // Initial style
         cornerButton.setStyle("-fx-background-radius: 10; " +
-                "-fx-background-color: #3cfcd6; " +
+                "-fx-background-color: orange; " +
                 "-fx-border-color: black; " +
                 "-fx-border-width: 2; " +
                 "-fx-cursor: hand;");
@@ -348,7 +353,7 @@ public class JavaFX extends Application {
             cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
             cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
             cornerButton.setStyle("-fx-background-radius: 10; " +
-                    "-fx-background-color: #3cfcd6; " +
+                    "-fx-background-color: #orange; " +
                     "-fx-border-color: black; " +
                     "-fx-border-width: 2; " +
                     "-fx-cursor: hand;");
@@ -360,27 +365,31 @@ public class JavaFX extends Application {
         return cornerButton;
     }
 
-    /*
+
     private Shape createRoad(Point corner1, Point corner2) {
         double roadWidth = 8; // Width of the road
+        double shrinkFactor = 10; // Distance to shrink the road from each corner
 
-        // Calculate the center point
-        double centerX = (corner1.getX() + corner2.getX()) / 2;
-        double centerY = (corner1.getY() + corner2.getY()) / 2;
+        // Calculate the direction vector from corner1 to corner2
+        double dx = corner2.getX() - corner1.getX();
+        double dy = corner2.getY() - corner1.getY();
+        double length = Math.sqrt(dx * dx + dy * dy);
+        double unitDx = dx / length;
+        double unitDy = dy / length;
 
-        // Calculate the length of the road
-        double length = Math.sqrt(Math.pow(corner2.getX() - corner1.getX(), 2) + Math.pow(corner2.getY() - corner1.getY(), 2));
+        // Calculate new start and end points for the road
+        double startX = corner1.getX() + unitDx * shrinkFactor;
+        double startY = corner1.getY() + unitDy * shrinkFactor;
+        double endX = corner2.getX() - unitDx * shrinkFactor;
+        double endY = corner2.getY() - unitDy * shrinkFactor;
 
-        // Create a rectangle to represent the road
-        Rectangle road = new Rectangle(centerX - roadWidth / 2, centerY - roadWidth / 2, roadWidth, length);
-        road.setFill(Color.BLACK); // Set road color
-
-        // Rotate the rectangle to align with the two corners
-        double angle = Math.toDegrees(Math.atan2(corner2.getY() - corner1.getY(), corner2.getX() - corner1.getX()));
-        road.setRotate(angle);
+        // Create a line to represent the road
+        Line road = new Line(startX, startY, endX, endY);
+        road.setStrokeWidth(roadWidth);
+        road.setStroke(Color.WHITE);
 
         return road;
     }
-*/
+
 
 }
