@@ -17,4 +17,4 @@ buildNumber.properties
 .classpath
 
 # Idea Project
-.idea/
+/.idea/

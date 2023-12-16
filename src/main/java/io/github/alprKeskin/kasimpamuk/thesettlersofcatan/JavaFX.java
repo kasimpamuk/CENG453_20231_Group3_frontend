@@ -41,8 +41,7 @@ public class JavaFX extends Application {
         // Game Board
         ArrayList<Terrain> terrains = createTerrainList();
         ArrayList<Integer> numbers = createNumberList();
-        int terrainIndex = 0;
-        int numberIndex = 0;
+
 
         int height = 700;
         int width = 700;
@@ -53,11 +52,17 @@ public class JavaFX extends Application {
         double boardCenterY = tileMap.getHeight()/2;
         primaryStage.setTitle("Catan Board");
         primaryStage.setScene(catan_board);
+
         int size = 50;
+
         double v=Math.sqrt(3)/2.0;
+
         int number;
         int tileIndex = 0;
 
+
+        int terrainIndex = 0;
+        int numberIndex = 0;
 
         // Create Odd Tiles
         for(double y = -1; y < 2; y++) {
