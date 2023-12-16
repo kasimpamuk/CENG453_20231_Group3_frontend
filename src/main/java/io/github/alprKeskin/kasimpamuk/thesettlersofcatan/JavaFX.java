@@ -4,6 +4,8 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,6 +72,56 @@ public class JavaFX extends Application {
         dice1.setImage(new Image("dice" + diceValue1 + ".png"));
         dice2.setImage(new Image("dice" + diceValue2 + ".png"));
     }
+    private Button createCornerButton(Point corner, EventHandler<ActionEvent> actionOnClick) {
+        double buttonSize = 7;
+
+        Button cornerButton = new Button("");
+        cornerButton.setMinSize(buttonSize, buttonSize);
+        cornerButton.setMaxSize(buttonSize, buttonSize);
+
+        // Position the button at the corner
+        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+
+        // Initial style
+        cornerButton.setStyle("-fx-background-radius: 10; " +
+                "-fx-background-color: #3cfcd6; " +
+                "-fx-border-color: black; " +
+                "-fx-border-width: 2; " +
+                "-fx-cursor: hand;");
+
+        // Hover effect - increase size
+        cornerButton.setOnMouseEntered(e -> {
+            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10);
+            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
+            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5);
+            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
+            cornerButton.setStyle("-fx-background-radius: 15; " +
+                    "-fx-background-color: #ff0000; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 2; " +
+                    "-fx-cursor: hand;");
+        });
+
+        // Hover effect - revert to original size
+        cornerButton.setOnMouseExited(e -> {
+            cornerButton.setMinSize(buttonSize, buttonSize);
+            cornerButton.setMaxSize(buttonSize, buttonSize);
+            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+            cornerButton.setStyle("-fx-background-radius: 10; " +
+                    "-fx-background-color: #3cfcd6; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 2; " +
+                    "-fx-cursor: hand;");
+        });
+
+        // Set the action to be performed on click
+        cornerButton.setOnAction(actionOnClick);
+
+        return cornerButton;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         // Register
@@ -135,49 +186,7 @@ public class JavaFX extends Application {
                     tileMap.getChildren().add(tile.getHexagon());
                     for (int i = 0; i < 6; i++) {
                         Point corner = tile.getCorners().get(i);
-                        Button cornerButton = new Button("");
-
-                        double buttonSize = 5;
-                        cornerButton.setMinSize(buttonSize, buttonSize);
-                        cornerButton.setMaxSize(buttonSize, buttonSize);
-
-                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-
-                        // Initial style
-                        cornerButton.setStyle("-fx-background-radius: 10; " +
-                                "-fx-background-color: red; " +
-                                "-fx-border-color: black; " +
-                                "-fx-border-width: 2; " +
-                                "-fx-cursor: hand;");
-
-                        // Hover effect - increase size
-                        cornerButton.setOnMouseEntered(e -> {
-                            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
-                            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
-                            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
-                            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
-                            cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
-                                    "-fx-background-color: blue; " +
-                                    "-fx-border-color: black; " +
-                                    "-fx-border-width: 2; " +
-                                    "-fx-cursor: hand;");
-                        });
-
-                        // Hover effect - revert to original size
-                        cornerButton.setOnMouseExited(e -> {
-                            cornerButton.setMinSize(buttonSize, buttonSize);
-                            cornerButton.setMaxSize(buttonSize, buttonSize);
-                            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-                            cornerButton.setStyle("-fx-background-radius: 10; " +
-                                    "-fx-background-color: red; " +
-                                    "-fx-border-color: black; " +
-                                    "-fx-border-width: 2; " +
-                                    "-fx-cursor: hand;");
-                        });
-
-                        cornerButton.setOnAction(e -> rollDice());
+                        Button cornerButton = createCornerButton(corner, e -> rollDice());
                         tileMap.getChildren().add(cornerButton);
                     }
 
@@ -194,49 +203,7 @@ public class JavaFX extends Application {
                     tileMap.getChildren().add(numberText);
                     for (int i = 0; i < 6; i++) {
                         Point corner = tile.getCorners().get(i);
-                        Button cornerButton = new Button("");
-
-                        double buttonSize = 5;
-                        cornerButton.setMinSize(buttonSize, buttonSize);
-                        cornerButton.setMaxSize(buttonSize, buttonSize);
-
-                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-
-                        // Initial style
-                        cornerButton.setStyle("-fx-background-radius: 10; " +
-                                "-fx-background-color: red; " +
-                                "-fx-border-color: black; " +
-                                "-fx-border-width: 2; " +
-                                "-fx-cursor: hand;");
-
-                        // Hover effect - increase size
-                        cornerButton.setOnMouseEntered(e -> {
-                            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
-                            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
-                            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
-                            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
-                            cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
-                                    "-fx-background-color: blue; " +
-                                    "-fx-border-color: black; " +
-                                    "-fx-border-width: 2; " +
-                                    "-fx-cursor: hand;");
-                        });
-
-                        // Hover effect - revert to original size
-                        cornerButton.setOnMouseExited(e -> {
-                            cornerButton.setMinSize(buttonSize, buttonSize);
-                            cornerButton.setMaxSize(buttonSize, buttonSize);
-                            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-                            cornerButton.setStyle("-fx-background-radius: 10; " +
-                                    "-fx-background-color: red; " +
-                                    "-fx-border-color: black; " +
-                                    "-fx-border-width: 2; " +
-                                    "-fx-cursor: hand;");
-                        });
-
-                        cornerButton.setOnAction(e -> rollDice());
+                        Button cornerButton = createCornerButton(corner, e -> rollDice());
                         tileMap.getChildren().add(cornerButton);
                     }
 
@@ -261,54 +228,9 @@ public class JavaFX extends Application {
                 tileMap.getChildren().add(numberText);
                 for (int i = 0; i < 6; i++) {
                     Point corner = tile.getCorners().get(i);
-                    Button cornerButton = new Button("");
-
-                    double buttonSize = 5;
-                    cornerButton.setMinSize(buttonSize, buttonSize);
-                    cornerButton.setMaxSize(buttonSize, buttonSize);
-
-                    cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                    cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-
-                    // Initial style
-                    cornerButton.setStyle("-fx-background-radius: 10; " +
-                            "-fx-background-color: red; " +
-                            "-fx-border-color: black; " +
-                            "-fx-border-width: 2; " +
-                            "-fx-cursor: hand;");
-
-                    // Hover effect - increase size
-                    cornerButton.setOnMouseEntered(e -> {
-                        cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
-                        cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
-                        cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
-                        cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
-                        cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
-                                "-fx-background-color: blue; " +
-                                "-fx-border-color: black; " +
-                                "-fx-border-width: 2; " +
-                                "-fx-cursor: hand;");
-                    });
-
-                    // Hover effect - revert to original size
-                    cornerButton.setOnMouseExited(e -> {
-                        cornerButton.setMinSize(buttonSize, buttonSize);
-                        cornerButton.setMaxSize(buttonSize, buttonSize);
-                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-                        cornerButton.setStyle("-fx-background-radius: 10; " +
-                                "-fx-background-color: red; " +
-                                "-fx-border-color: black; " +
-                                "-fx-border-width: 2; " +
-                                "-fx-cursor: hand;");
-                    });
-
-                    cornerButton.setOnAction(e -> rollDice());
+                    Button cornerButton = createCornerButton(corner, e -> rollDice());
                     tileMap.getChildren().add(cornerButton);
                 }
-
-
-
             }
         }
 
@@ -339,13 +261,10 @@ public class JavaFX extends Application {
         Button rollDiceButton = new Button("Roll Dice");
         rollDiceButton.setOnAction(e -> rollDice());
 
-
         // Bottom console
         HBox bottomConsole = new HBox(20, resource_box, dice_box, rollDiceButton);
         bottomConsole.setAlignment(Pos.CENTER);
         borderPane.setBottom(bottomConsole);
-
-
 
         primaryStage.show();
     }
