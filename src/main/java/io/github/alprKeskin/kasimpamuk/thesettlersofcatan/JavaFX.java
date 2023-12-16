@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -18,14 +19,19 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class JavaFX extends Application {
+
+    private List<Tile> tiles = new ArrayList<Tile>();
+
     private ArrayList<String> createTerrainList() {
         ArrayList<String> terrains = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -126,7 +132,8 @@ public class JavaFX extends Application {
                 String terrain;
                 if(y==0 && x==0) {
                     terrain = "desert";
-                    Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, 0, size);
+                    Tile tile = new Tile(tileIndex++, new Point(centerx, centery), terrain, 0, size);
+                    this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
                 }
                 else{
@@ -135,7 +142,8 @@ public class JavaFX extends Application {
                     Text numberText = new Text(String.valueOf(number));
                     numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
                     numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
-                    Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, number, size);
+                    Tile tile = new Tile(tileIndex++ , new Point(centerx, centery), terrain, number, size);
+                    this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
                     tileMap.getChildren().add(numberText);
                 }
@@ -152,7 +160,8 @@ public class JavaFX extends Application {
                 Text numberText = new Text(String.valueOf(number));
                 numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
                 numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
-                Tile tile = new Tile(tileIndex++ , centerx, centery, terrain, number, size);
+                Tile tile = new Tile(tileIndex++ , new Point(centerx, centery), terrain, number, size);
+                this.tiles.add(tile);
                 tileMap.getChildren().add(tile.getHexagon());
                 tileMap.getChildren().add(numberText);
 
@@ -189,10 +198,16 @@ public class JavaFX extends Application {
         // Bottom console
         HBox bottomConsole = new HBox(20, resource_box, dice_box, rollDiceButton);
         bottomConsole.setAlignment(Pos.CENTER);
-
-
-
         tileMap.setBottom(bottomConsole);
+
+        // Roll dice button
+        Button btn = new Button("safkljdslkgfjds");
+        btn.setLayoutX(tiles.get(0).getCorners().get(0).getX());
+        btn.setLayoutY(tiles.get(0).getCorners().get(0).getY());
+        btn.setOnAction(e -> rollDice());
+        System.out.println(tileMap.getChildren());
+
+
 
 
 
