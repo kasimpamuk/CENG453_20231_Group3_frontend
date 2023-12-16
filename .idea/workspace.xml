@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8f92681-0fd5-44c5-92d6-8dcb30f30f24" name="Changes" comment="dev: add resource images">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +212,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="kasim" />
                       </list>
                     </value>
                   </entry>

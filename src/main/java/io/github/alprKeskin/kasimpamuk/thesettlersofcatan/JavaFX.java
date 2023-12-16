@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -22,6 +23,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class JavaFX extends Application {
     private ArrayList<String> createTerrainList() {
@@ -58,6 +60,15 @@ public class JavaFX extends Application {
         box.setAlignment(Pos.CENTER);
 
         return box;
+    }
+    private ImageView dice1, dice2;
+    private void rollDice() {
+        Random random = new Random();
+        int diceValue1 = random.nextInt(6) + 1; // Dice values between 1 and 6
+        int diceValue2 = random.nextInt(6) + 1;
+
+        dice1.setImage(new Image("dice" + diceValue1 + ".png"));
+        dice2.setImage(new Image("dice" + diceValue2 + ".png"));
     }
     @Override
     public void start(Stage primaryStage) {
@@ -159,22 +170,26 @@ public class JavaFX extends Application {
         VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0);
         resource_box.getChildren().addAll(brickBox, grainBox, lumberBox, oreBox, woolBox);
 
-        // Dice box setup
         HBox dice_box = new HBox(10);
         dice_box.setAlignment(Pos.CENTER);
         dice_box.setPadding(new Insets(10));
         dice_box.setStyle("-fx-background-color: #87CEEB;");
-        ImageView dice1 = new ImageView("dice.png");
+        dice1 = new ImageView(new Image("dice1.png"));
+        dice2 = new ImageView(new Image("dice1.png"));
         dice1.setFitHeight(50);
         dice1.setFitWidth(50);
-        ImageView dice2 = new ImageView("dice.png");
         dice2.setFitHeight(50);
         dice2.setFitWidth(50);
         dice_box.getChildren().addAll(dice1, dice2);
 
-        // Bottom console containing both resource box and dice box side by side
-        HBox bottomConsole = new HBox(20, resource_box, dice_box);
+        // Roll dice button
+        Button rollDiceButton = new Button("Roll Dice");
+        rollDiceButton.setOnAction(e -> rollDice());
+
+        // Bottom console
+        HBox bottomConsole = new HBox(20, resource_box, dice_box, rollDiceButton);
         bottomConsole.setAlignment(Pos.CENTER);
+
 
 
         tileMap.setBottom(bottomConsole);
