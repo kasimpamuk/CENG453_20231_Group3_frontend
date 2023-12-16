@@ -11,13 +11,19 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,110 +35,6 @@ import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Ter
 public class JavaFX extends Application {
 
     private List<Tile> tiles = new ArrayList<Tile>();
-
-    private ArrayList<Terrain> createTerrainList() {
-        ArrayList<Terrain> terrains = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            terrains.add(HILL); // 3 hills
-            terrains.add(MOUNTAIN); // 3 mountains
-        }
-        for (int i = 0; i < 4; i++) {
-            terrains.add(FOREST); // 4 forests
-            terrains.add(FIELD); // 4 fields
-            terrains.add(PASTURE); // 4 pastures
-        }
-        Collections.shuffle(terrains);
-        return terrains;
-    }
-    private ArrayList<Integer> createNumberList() {
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.addAll(Arrays.asList(2, 12)); // One each of 2, 3, 11, and 12
-        for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) { // Two each of 4, 5, 6, 8, 9, and 10
-            numbers.add(number);
-            numbers.add(number);
-        }
-        Collections.shuffle(numbers);
-        return numbers;
-    }
-    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount, String backgroundColor) {
-        ImageView imageView = new ImageView(imagePath);
-        imageView.setFitHeight(size);
-        imageView.setFitWidth(size);
-
-        Label countLabel = new Label(Integer.toString(initialCount));
-        countLabel.setFont(new Font("Arial", 20)); // Increase the font size
-        countLabel.setTextFill(Color.WHITE); // Set a text color that contrasts with the background
-        countLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 5;"); // Semi-transparent background for readability
-        countLabel.setAlignment(Pos.CENTER); // Center align the text
-
-        VBox box = new VBox(5, imageView, countLabel);
-        box.setAlignment(Pos.CENTER);
-        box.setPadding(new Insets(10));
-        box.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
-
-        return box;
-    }
-
-
-    private ImageView dice1, dice2;
-    private void rollDice() {
-        Random random = new Random();
-        int diceValue1 = random.nextInt(6) + 1; // Dice values between 1 and 6
-        int diceValue2 = random.nextInt(6) + 1;
-
-        dice1.setImage(new Image("dice" + diceValue1 + ".png"));
-        dice2.setImage(new Image("dice" + diceValue2 + ".png"));
-    }
-    private Button createCornerButton(Point corner, EventHandler<ActionEvent> actionOnClick) {
-        double buttonSize = 7;
-
-        Button cornerButton = new Button("");
-        cornerButton.setMinSize(buttonSize, buttonSize);
-        cornerButton.setMaxSize(buttonSize, buttonSize);
-
-        // Position the button at the corner
-        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-
-        // Initial style
-        cornerButton.setStyle("-fx-background-radius: 10; " +
-                "-fx-background-color: orange; " +
-                "-fx-border-color: black; " +
-                "-fx-border-width: 2; " +
-                "-fx-cursor: hand;");
-
-        // Hover effect - increase size
-        cornerButton.setOnMouseEntered(e -> {
-            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10);
-            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
-            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5);
-            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
-            cornerButton.setStyle("-fx-background-radius: 15; " +
-                    "-fx-background-color: #ff0000; " +
-                    "-fx-border-color: black; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-cursor: hand;");
-        });
-
-        // Hover effect - revert to original size
-        cornerButton.setOnMouseExited(e -> {
-            cornerButton.setMinSize(buttonSize, buttonSize);
-            cornerButton.setMaxSize(buttonSize, buttonSize);
-            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-            cornerButton.setStyle("-fx-background-radius: 10; " +
-                    "-fx-background-color: orange; " +
-                    "-fx-border-color: black; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-cursor: hand;");
-        });
-
-        // Set the action to be performed on click
-        cornerButton.setOnAction(actionOnClick);
-
-        return cornerButton;
-    }
-
     @Override
     public void start(Stage primaryStage) {
         // Register
@@ -243,6 +145,7 @@ public class JavaFX extends Application {
                 }
             }
         }
+        //tileMap.getChildren().add(createRoad(tiles.get(0).getCorners().get(0), tiles.get(0).getCorners().get(1)));
 
         HBox resource_box = new HBox(10);
         resource_box.setAlignment(Pos.CENTER);
@@ -279,4 +182,128 @@ public class JavaFX extends Application {
 
         primaryStage.show();
     }
+    private ArrayList<Terrain> createTerrainList() {
+        ArrayList<Terrain> terrains = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            terrains.add(HILL); // 3 hills
+            terrains.add(MOUNTAIN); // 3 mountains
+        }
+        for (int i = 0; i < 4; i++) {
+            terrains.add(FOREST); // 4 forests
+            terrains.add(FIELD); // 4 fields
+            terrains.add(PASTURE); // 4 pastures
+        }
+        Collections.shuffle(terrains);
+        return terrains;
+    }
+    private ArrayList<Integer> createNumberList() {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.addAll(Arrays.asList(2, 12)); // One each of 2, 3, 11, and 12
+        for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) { // Two each of 4, 5, 6, 8, 9, and 10
+            numbers.add(number);
+            numbers.add(number);
+        }
+        Collections.shuffle(numbers);
+        return numbers;
+    }
+    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount, String backgroundColor) {
+        ImageView imageView = new ImageView(imagePath);
+        imageView.setFitHeight(size);
+        imageView.setFitWidth(size);
+
+        Label countLabel = new Label(Integer.toString(initialCount));
+        countLabel.setFont(new Font("Arial", 20)); // Increase the font size
+        countLabel.setTextFill(Color.WHITE); // Set a text color that contrasts with the background
+        countLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 5;"); // Semi-transparent background for readability
+        countLabel.setAlignment(Pos.CENTER); // Center align the text
+
+        VBox box = new VBox(5, imageView, countLabel);
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(10));
+        box.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
+
+        return box;
+    }
+
+
+    private ImageView dice1, dice2;
+    private void rollDice() {
+        Random random = new Random();
+        int diceValue1 = random.nextInt(6) + 1; // Dice values between 1 and 6
+        int diceValue2 = random.nextInt(6) + 1;
+
+        dice1.setImage(new Image("dice" + diceValue1 + ".png"));
+        dice2.setImage(new Image("dice" + diceValue2 + ".png"));
+    }
+    private Button createCornerButton(Point corner, EventHandler<ActionEvent> actionOnClick) {
+        double buttonSize = 7;
+
+        Button cornerButton = new Button("");
+        cornerButton.setMinSize(buttonSize, buttonSize);
+        cornerButton.setMaxSize(buttonSize, buttonSize);
+
+        // Position the button at the corner
+        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+
+        // Initial style
+        cornerButton.setStyle("-fx-background-radius: 10; " +
+                "-fx-background-color: orange; " +
+                "-fx-border-color: black; " +
+                "-fx-border-width: 2; " +
+                "-fx-cursor: hand;");
+
+        // Hover effect - increase size
+        cornerButton.setOnMouseEntered(e -> {
+            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10);
+            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
+            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5);
+            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
+            cornerButton.setStyle("-fx-background-radius: 15; " +
+                    "-fx-background-color: #ff0000; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 2; " +
+                    "-fx-cursor: hand;");
+        });
+
+        // Hover effect - revert to original size
+        cornerButton.setOnMouseExited(e -> {
+            cornerButton.setMinSize(buttonSize, buttonSize);
+            cornerButton.setMaxSize(buttonSize, buttonSize);
+            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+            cornerButton.setStyle("-fx-background-radius: 10; " +
+                    "-fx-background-color: orange; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 2; " +
+                    "-fx-cursor: hand;");
+        });
+
+        // Set the action to be performed on click
+        cornerButton.setOnAction(actionOnClick);
+
+        return cornerButton;
+    }
+/*
+    private Shape createRoad(Point corner1, Point corner2) {
+        double roadWidth = 8; // Width of the road
+
+        // Calculate the center point
+        double centerX = (corner1.getX() + corner2.getX()) / 2;
+        double centerY = (corner1.getY() + corner2.getY()) / 2;
+
+        // Calculate the length of the road
+        double length = Math.sqrt(Math.pow(corner2.getX() - corner1.getX(), 2) + Math.pow(corner2.getY() - corner1.getY(), 2));
+
+        // Create a rectangle to represent the road
+        Rectangle road = new Rectangle(centerX - roadWidth / 2, centerY - roadWidth / 2, roadWidth, length);
+        road.setFill(Color.BLACK); // Set road color
+
+        // Rotate the rectangle to align with the two corners
+        double angle = Math.toDegrees(Math.atan2(corner2.getY() - corner1.getY(), corner2.getX() - corner1.getX()));
+        road.setRotate(angle);
+
+        return road;
+    }
+*/
 }
