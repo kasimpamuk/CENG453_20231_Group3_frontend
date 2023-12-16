@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import lombok.Getter;
@@ -14,20 +15,19 @@ public class Tile {
     private final int id;
     private final Point center;
     private final int edgeSize;
-    private final String terrainType;
+    private final Terrain terrain;
     private final int number;
     private List<Point> corners;
     //private Edge[] edges;
     static int cornerId = 0;
     static int edgeId = 0;
-
     private Polygon hexagon;
 
-    public Tile(int id, Point center, String terrainType, int number, int edgeSize) {
+    public Tile(int id, Point center, Terrain terrain, int number, int edgeSize) {
         this.id = id;
         this.center = center;
         this.edgeSize = edgeSize;
-        this.terrainType = terrainType;
+        this.terrain = terrain;
         this.number = number;
 
         corners = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Tile {
         hexagon.getPoints().addAll(hexPoints);
         hexagon.setStrokeWidth(2);
         hexagon.setStroke(Color.BLACK);
-        hexagon.setFill(getTerrainColor(terrainType));
+        hexagon.setFill(terrain.getColor());
 
         // Initialize corners and edges
 //        for (int i = 0; i < 6; i++) {
@@ -65,18 +65,6 @@ public class Tile {
                 center.getX() + v * edgeSize, center.getY() - (double) edgeSize / 2,
                 center.getX() + v * edgeSize, center.getY() + (double) edgeSize / 2,
                 center.getX(), center.getY() + (double) edgeSize
-        };
-    }
-
-    private Color getTerrainColor(String terrain) {
-        return switch (terrain) {
-            case "desert" -> Color.web("#e4c49f"); // A sandy beige, resembling desert sand
-            case "hills" -> Color.web("#b7410e"); // A darker earth tone, suggestive of rocky hills
-            case "mountains" -> Color.web("#708090"); // A muted grey with a hint of green, resembling mountain rock
-            case "forest" -> Color.web("#228b22"); // A deep green, representative of dense forests
-            case "fields" -> Color.web("#ffc300"); // A golden wheat color, typical of fields
-            case "pasture" -> Color.web("#7bb274"); // A fresh, vibrant green, suggestive of lush pastures
-            default -> Color.web("#ffffff"); // Pure white for undefined terrain
         };
     }
 

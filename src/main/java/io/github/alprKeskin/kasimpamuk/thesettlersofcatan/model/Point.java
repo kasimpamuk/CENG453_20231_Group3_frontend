@@ -1,29 +1,20 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
-import lombok.Getter;
+import lombok.*;
+
 @Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Point {
     private double x;
     private double y;
-    public Point(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setX(Double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
 
     @Override
-    public String toString() {
-        return  "{" + x + "," + y + '}';
-    }
-
-    public boolean equals(Point p) {
-        return (this.x == p.getX() && this.y == p.getY());
+    public boolean equals(Object object) {
+        if (object == this) return true;
+        if (!(object instanceof Point point)) return false;
+        return (this.x == point.getX() && this.y == point.getY());
     }
 }

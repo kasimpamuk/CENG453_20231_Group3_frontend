@@ -2,8 +2,8 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,34 +14,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain.*;
+
 public class JavaFX extends Application {
 
     private List<Tile> tiles = new ArrayList<Tile>();
 
-    private ArrayList<String> createTerrainList() {
-        ArrayList<String> terrains = new ArrayList<>();
+    private ArrayList<Terrain> createTerrainList() {
+        ArrayList<Terrain> terrains = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            terrains.add("hills"); // 3 hills
-            terrains.add("mountains"); // 3 mountains
+            terrains.add(HILL); // 3 hills
+            terrains.add(MOUNTAIN); // 3 mountains
         }
         for (int i = 0; i < 4; i++) {
-            terrains.add("forest"); // 4 forests
-            terrains.add("fields"); // 4 fields
-            terrains.add("pasture"); // 4 pastures
+            terrains.add(FOREST); // 4 forests
+            terrains.add(FIELD); // 4 fields
+            terrains.add(PASTURE); // 4 pastures
         }
         Collections.shuffle(terrains);
         return terrains;
@@ -99,7 +96,7 @@ public class JavaFX extends Application {
         register_st.show();
 
 
-        ArrayList<String> terrains = createTerrainList();
+        ArrayList<Terrain> terrains = createTerrainList();
         ArrayList<Integer> numbers = createNumberList();
         int terrainIndex = 0;
         int numberIndex = 0;
@@ -129,9 +126,9 @@ public class JavaFX extends Application {
                     continue;
 
                 double centerx=board_centerx+x*size*Math.sqrt(3);
-                String terrain;
+                Terrain terrain;
                 if(y==0 && x==0) {
-                    terrain = "desert";
+                    terrain = DESERT;
                     Tile tile = new Tile(tileIndex++, new Point(centerx, centery), terrain, 0, size);
                     this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
@@ -155,7 +152,7 @@ public class JavaFX extends Application {
             centerx= board_centerx + x*size*Math.sqrt(3);
             for(int y=-1; y<2;y+=2){
                 centery= board_centery + y*size*3/2;
-                String terrain = terrains.get(terrainIndex++);
+                Terrain terrain = terrains.get(terrainIndex++);
                 number = numbers.get(numberIndex++);
                 Text numberText = new Text(String.valueOf(number));
                 numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
@@ -167,6 +164,8 @@ public class JavaFX extends Application {
 
             }
         }
+
+        //ghfghf
 
         HBox resource_box = new HBox(10);
         resource_box.setAlignment(Pos.CENTER);
