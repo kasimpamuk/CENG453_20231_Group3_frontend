@@ -103,9 +103,15 @@ public class JavaFX extends Application {
         int width = 700;
         Pane tileMap = new Pane();
         tileMap.setStyle("-fx-background-color: #87CEEB;");
-        Scene catan_board = new Scene(tileMap, width, height);
-        double boardCenterX = tileMap.getWidth()/2;
-        double boardCenterY = tileMap.getHeight()/2;
+        tileMap.setPrefSize(width, height);
+        pane.setPrefSize(900, 900);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #87CEEB;");
+        borderPane.setCenter(tileMap);
+        Scene catan_board = new Scene(borderPane, width, height);
+        double boardCenterX = borderPane.getWidth()/2 ;
+        double boardCenterY = borderPane.getHeight()/2;
         primaryStage.setTitle("Catan Board");
         primaryStage.setScene(catan_board);
         int size = 50;
@@ -127,6 +133,54 @@ public class JavaFX extends Application {
                     Tile tile = new Tile(tileIndex++, new Point(centerX, centerY), terrain, 0, size);
                     this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
+                    for (int i = 0; i < 6; i++) {
+                        Point corner = tile.getCorners().get(i);
+                        Button cornerButton = new Button("");
+
+                        double buttonSize = 5;
+                        cornerButton.setMinSize(buttonSize, buttonSize);
+                        cornerButton.setMaxSize(buttonSize, buttonSize);
+
+                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+
+                        // Initial style
+                        cornerButton.setStyle("-fx-background-radius: 10; " +
+                                "-fx-background-color: red; " +
+                                "-fx-border-color: black; " +
+                                "-fx-border-width: 2; " +
+                                "-fx-cursor: hand;");
+
+                        // Hover effect - increase size
+                        cornerButton.setOnMouseEntered(e -> {
+                            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
+                            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
+                            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
+                            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
+                            cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
+                                    "-fx-background-color: blue; " +
+                                    "-fx-border-color: black; " +
+                                    "-fx-border-width: 2; " +
+                                    "-fx-cursor: hand;");
+                        });
+
+                        // Hover effect - revert to original size
+                        cornerButton.setOnMouseExited(e -> {
+                            cornerButton.setMinSize(buttonSize, buttonSize);
+                            cornerButton.setMaxSize(buttonSize, buttonSize);
+                            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+                            cornerButton.setStyle("-fx-background-radius: 10; " +
+                                    "-fx-background-color: red; " +
+                                    "-fx-border-color: black; " +
+                                    "-fx-border-width: 2; " +
+                                    "-fx-cursor: hand;");
+                        });
+
+                        cornerButton.setOnAction(e -> rollDice());
+                        tileMap.getChildren().add(cornerButton);
+                    }
+
                 }
                 else{
                     terrain = terrains.get(terrainIndex++);
@@ -138,10 +192,54 @@ public class JavaFX extends Application {
                     this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
                     tileMap.getChildren().add(numberText);
-                    Button benjamin = new Button("Hello");
-                    benjamin.setLayoutX(centerX - numberText.getBoundsInLocal().getWidth() / 2);
-                    benjamin.setLayoutY(centerY + numberText.getBoundsInLocal().getHeight() / 4);
-                    tileMap.getChildren().add(benjamin);
+                    for (int i = 0; i < 6; i++) {
+                        Point corner = tile.getCorners().get(i);
+                        Button cornerButton = new Button("");
+
+                        double buttonSize = 5;
+                        cornerButton.setMinSize(buttonSize, buttonSize);
+                        cornerButton.setMaxSize(buttonSize, buttonSize);
+
+                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+
+                        // Initial style
+                        cornerButton.setStyle("-fx-background-radius: 10; " +
+                                "-fx-background-color: red; " +
+                                "-fx-border-color: black; " +
+                                "-fx-border-width: 2; " +
+                                "-fx-cursor: hand;");
+
+                        // Hover effect - increase size
+                        cornerButton.setOnMouseEntered(e -> {
+                            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
+                            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
+                            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
+                            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
+                            cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
+                                    "-fx-background-color: blue; " +
+                                    "-fx-border-color: black; " +
+                                    "-fx-border-width: 2; " +
+                                    "-fx-cursor: hand;");
+                        });
+
+                        // Hover effect - revert to original size
+                        cornerButton.setOnMouseExited(e -> {
+                            cornerButton.setMinSize(buttonSize, buttonSize);
+                            cornerButton.setMaxSize(buttonSize, buttonSize);
+                            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+                            cornerButton.setStyle("-fx-background-radius: 10; " +
+                                    "-fx-background-color: red; " +
+                                    "-fx-border-color: black; " +
+                                    "-fx-border-width: 2; " +
+                                    "-fx-cursor: hand;");
+                        });
+
+                        cornerButton.setOnAction(e -> rollDice());
+                        tileMap.getChildren().add(cornerButton);
+                    }
+
                 }
             }
         }
@@ -161,11 +259,58 @@ public class JavaFX extends Application {
                 this.tiles.add(tile);
                 tileMap.getChildren().add(tile.getHexagon());
                 tileMap.getChildren().add(numberText);
+                for (int i = 0; i < 6; i++) {
+                    Point corner = tile.getCorners().get(i);
+                    Button cornerButton = new Button("");
+
+                    double buttonSize = 5;
+                    cornerButton.setMinSize(buttonSize, buttonSize);
+                    cornerButton.setMaxSize(buttonSize, buttonSize);
+
+                    cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                    cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+
+                    // Initial style
+                    cornerButton.setStyle("-fx-background-radius: 10; " +
+                            "-fx-background-color: red; " +
+                            "-fx-border-color: black; " +
+                            "-fx-border-width: 2; " +
+                            "-fx-cursor: hand;");
+
+                    // Hover effect - increase size
+                    cornerButton.setOnMouseEntered(e -> {
+                        cornerButton.setMinSize(buttonSize + 10, buttonSize + 10); // Increased size
+                        cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
+                        cornerButton.setLayoutX(cornerButton.getLayoutX() - 5); // Adjust position to keep centered
+                        cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
+                        cornerButton.setStyle("-fx-background-radius: 15; " + // Adjust radius for circular shape
+                                "-fx-background-color: blue; " +
+                                "-fx-border-color: black; " +
+                                "-fx-border-width: 2; " +
+                                "-fx-cursor: hand;");
+                    });
+
+                    // Hover effect - revert to original size
+                    cornerButton.setOnMouseExited(e -> {
+                        cornerButton.setMinSize(buttonSize, buttonSize);
+                        cornerButton.setMaxSize(buttonSize, buttonSize);
+                        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
+                        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
+                        cornerButton.setStyle("-fx-background-radius: 10; " +
+                                "-fx-background-color: red; " +
+                                "-fx-border-color: black; " +
+                                "-fx-border-width: 2; " +
+                                "-fx-cursor: hand;");
+                    });
+
+                    cornerButton.setOnAction(e -> rollDice());
+                    tileMap.getChildren().add(cornerButton);
+                }
+
+
 
             }
         }
-
-        //ghfghf
 
         HBox resource_box = new HBox(10);
         resource_box.setAlignment(Pos.CENTER);
@@ -194,17 +339,12 @@ public class JavaFX extends Application {
         Button rollDiceButton = new Button("Roll Dice");
         rollDiceButton.setOnAction(e -> rollDice());
 
+
         // Bottom console
         HBox bottomConsole = new HBox(20, resource_box, dice_box, rollDiceButton);
         bottomConsole.setAlignment(Pos.CENTER);
-        // tileMap.setBottom(bottomConsole);
+        borderPane.setBottom(bottomConsole);
 
-        // Roll dice button
-        Button btn = new Button("safkljdslkgfjds");
-        btn.setLayoutX(tiles.get(0).getCorners().get(0).getX());
-        btn.setLayoutY(tiles.get(0).getCorners().get(0).getY());
-        btn.setOnAction(e -> rollDice());
-        System.out.println(tileMap.getChildren());
 
 
         primaryStage.show();
