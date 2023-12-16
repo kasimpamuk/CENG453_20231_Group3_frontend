@@ -48,7 +48,17 @@ public class JavaFX extends Application {
         Collections.shuffle(numbers);
         return numbers;
     }
+    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount) {
+        ImageView imageView = new ImageView(imagePath);
+        imageView.setFitHeight(size);
+        imageView.setFitWidth(size);
 
+        Label countLabel = new Label(Integer.toString(initialCount));
+        VBox box = new VBox(5, imageView, countLabel);
+        box.setAlignment(Pos.CENTER);
+
+        return box;
+    }
     @Override
     public void start(Stage primaryStage) {
         GridPane pane = new GridPane();
@@ -77,9 +87,9 @@ public class JavaFX extends Application {
         int terrainIndex = 0;
         int numberIndex = 0;
 
-        int height = 500;
-        int width = 500;
-        AnchorPane tileMap = new AnchorPane();
+        int height = 700;
+        int width = 700;
+        BorderPane tileMap = new BorderPane();
         tileMap.setStyle("-fx-background-color: #87CEEB;");
         Scene catan_board = new Scene(tileMap, width, height);
         double board_centerx = tileMap.getWidth()/2;
@@ -90,6 +100,8 @@ public class JavaFX extends Application {
         double v=Math.sqrt(3)/2.0;
         int number;
         int tileIndex = 0;
+
+
 
         for(double y=-1;y<2;y++)
         {
@@ -135,6 +147,40 @@ public class JavaFX extends Application {
 
             }
         }
+
+        HBox resource_box = new HBox(10);
+        resource_box.setAlignment(Pos.CENTER);
+        resource_box.setPadding(new Insets(10));
+        resource_box.setStyle("-fx-background-color: #FFFD74;");
+        VBox brickBox = createResourceBox("brick.png", 50, "Brick", 0);
+        VBox grainBox = createResourceBox("grain.png", 50, "Grain", 0);
+        VBox lumberBox = createResourceBox("lumber.png", 50, "Lumber", 0);
+        VBox oreBox = createResourceBox("ore.png", 50, "Ore", 0);
+        VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0);
+        resource_box.getChildren().addAll(brickBox, grainBox, lumberBox, oreBox, woolBox);
+
+        // Dice box setup
+        HBox dice_box = new HBox(10);
+        dice_box.setAlignment(Pos.CENTER);
+        dice_box.setPadding(new Insets(10));
+        dice_box.setStyle("-fx-background-color: #87CEEB;");
+        ImageView dice1 = new ImageView("dice.png");
+        dice1.setFitHeight(50);
+        dice1.setFitWidth(50);
+        ImageView dice2 = new ImageView("dice.png");
+        dice2.setFitHeight(50);
+        dice2.setFitWidth(50);
+        dice_box.getChildren().addAll(dice1, dice2);
+
+        // Bottom console containing both resource box and dice box side by side
+        HBox bottomConsole = new HBox(20, resource_box, dice_box);
+        bottomConsole.setAlignment(Pos.CENTER);
+
+
+        tileMap.setBottom(bottomConsole);
+
+
+
 
         primaryStage.show();
     }
