@@ -8,9 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -75,6 +73,7 @@ public class JavaFX extends Application {
     }
     @Override
     public void start(Stage primaryStage) {
+        // Register
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(11, 12, 13, 14));
@@ -89,13 +88,12 @@ public class JavaFX extends Application {
         pane.add(btAdd, 1, 2);
         GridPane.setHalignment(btAdd, HPos.RIGHT);
 
-
         Stage register_st = new Stage();
         register_st.setTitle("Register User");
         register_st.setScene(new Scene(pane, 300, 200));
         register_st.show();
 
-
+        // Game Board
         ArrayList<Terrain> terrains = createTerrainList();
         ArrayList<Integer> numbers = createNumberList();
         int terrainIndex = 0;
@@ -103,11 +101,11 @@ public class JavaFX extends Application {
 
         int height = 700;
         int width = 700;
-        BorderPane tileMap = new BorderPane();
+        Pane tileMap = new Pane();
         tileMap.setStyle("-fx-background-color: #87CEEB;");
         Scene catan_board = new Scene(tileMap, width, height);
-        double board_centerx = tileMap.getWidth()/2;
-        double board_centery = tileMap.getHeight()/2;
+        double boardCenterX = tileMap.getWidth()/2;
+        double boardCenterY = tileMap.getHeight()/2;
         primaryStage.setTitle("Catan Board");
         primaryStage.setScene(catan_board);
         int size = 50;
@@ -116,20 +114,17 @@ public class JavaFX extends Application {
         int tileIndex = 0;
 
 
+        // Create Odd Tiles
+        for(double y = -1; y < 2; y++) {
+            double centerY= boardCenterY + y * size * 3;
+            for (double x = -2; x < 3; x++) {
+                if(((y == -1 || y == 1) && (x == -2 || x == 2))) continue;
 
-        for(double y=-1;y<2;y++)
-        {
-            double centery= board_centery + y*size*3;
-            for(double x=-2;x<3;x++)
-            {
-                if(((y==-1 || y==1) && (x==-2 || x==2)))
-                    continue;
-
-                double centerx=board_centerx+x*size*Math.sqrt(3);
+                double centerX = boardCenterX + x * size * Math.sqrt(3);
                 Terrain terrain;
-                if(y==0 && x==0) {
+                if(y == 0 && x == 0) {
                     terrain = DESERT;
-                    Tile tile = new Tile(tileIndex++, new Point(centerx, centery), terrain, 0, size);
+                    Tile tile = new Tile(tileIndex++, new Point(centerX, centerY), terrain, 0, size);
                     this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
                 }
@@ -137,21 +132,26 @@ public class JavaFX extends Application {
                     terrain = terrains.get(terrainIndex++);
                     number = numbers.get(numberIndex++);
                     Text numberText = new Text(String.valueOf(number));
-                    numberText.setX(centerx - numberText.getBoundsInLocal().getWidth() / 2);
-                    numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
-                    Tile tile = new Tile(tileIndex++ , new Point(centerx, centery), terrain, number, size);
+                    numberText.setX(centerX - numberText.getBoundsInLocal().getWidth() / 2);
+                    numberText.setY(centerY + numberText.getBoundsInLocal().getHeight() / 4);
+                    Tile tile = new Tile(tileIndex++ , new Point(centerX, centerY), terrain, number, size);
                     this.tiles.add(tile);
                     tileMap.getChildren().add(tile.getHexagon());
                     tileMap.getChildren().add(numberText);
+                    Button benjamin = new Button("Hello");
+                    benjamin.setLayoutX(centerX - numberText.getBoundsInLocal().getWidth() / 2);
+                    benjamin.setLayoutY(centerY + numberText.getBoundsInLocal().getHeight() / 4);
+                    tileMap.getChildren().add(benjamin);
                 }
             }
         }
-        board_centerx = board_centerx -  size*v;
+        boardCenterX = boardCenterX -  size*v;
         double centerx, centery;
+        // Create even tiles
         for(int x=-1; x<3; x++){
-            centerx= board_centerx + x*size*Math.sqrt(3);
+            centerx= boardCenterX + x*size*Math.sqrt(3);
             for(int y=-1; y<2;y+=2){
-                centery= board_centery + y*size*3/2;
+                centery= boardCenterY + y*size*3/2;
                 Terrain terrain = terrains.get(terrainIndex++);
                 number = numbers.get(numberIndex++);
                 Text numberText = new Text(String.valueOf(number));
@@ -197,7 +197,7 @@ public class JavaFX extends Application {
         // Bottom console
         HBox bottomConsole = new HBox(20, resource_box, dice_box, rollDiceButton);
         bottomConsole.setAlignment(Pos.CENTER);
-        tileMap.setBottom(bottomConsole);
+        // tileMap.setBottom(bottomConsole);
 
         // Roll dice button
         Button btn = new Button("safkljdslkgfjds");
@@ -205,10 +205,6 @@ public class JavaFX extends Application {
         btn.setLayoutY(tiles.get(0).getCorners().get(0).getY());
         btn.setOnAction(e -> rollDice());
         System.out.println(tileMap.getChildren());
-
-
-
-
 
 
         primaryStage.show();
