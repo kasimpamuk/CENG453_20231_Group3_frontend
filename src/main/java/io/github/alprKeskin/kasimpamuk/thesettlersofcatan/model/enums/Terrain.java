@@ -27,7 +27,7 @@ public enum Terrain {
             case "mountain" -> Color.web("#708090"); // A muted grey with a hint of green, resembling mountain rock
             case "forest" -> Color.web("#228b22"); // A deep green, representative of dense forests
             case "field" -> Color.web("#ffc300"); // A golden wheat color, typical of fields
-            case "pasture" -> Color.web("#7bb274"); // A fresh, vibrant green, suggestive of lush pastures
+            case "pasture" -> Color.web("#b6c9a2"); // A fresh, vibrant green, suggestive of lush pastures
             default -> Color.web("#ffffff"); // Pure white for undefined terrain
         };
     }

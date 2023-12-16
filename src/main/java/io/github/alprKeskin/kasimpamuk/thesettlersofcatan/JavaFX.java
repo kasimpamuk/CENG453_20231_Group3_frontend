@@ -12,11 +12,19 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -76,7 +84,6 @@ public class JavaFX extends Application {
                     terrain = DESERT;
                     Tile tile = new Tile(tileIndex++, new Point(centerX, centerY), terrain, 0, size);
                     this.tiles.add(tile);
-                    System.out.println(tile.getId() + " des => number: " + tile.getNumber());
                     tileMap.getChildren().add(tile.getHexagon());
                 }
                 else{
@@ -87,7 +94,6 @@ public class JavaFX extends Application {
                     numberText.setY(centerY + numberText.getBoundsInLocal().getHeight() / 4);
                     Tile tile = new Tile(tileIndex++ , new Point(centerX, centerY), terrain, number, size);
                     this.tiles.add(tile);
-                    System.out.println(tile.getId() + " for1 => number: " + tile.getNumber());
                     tileMap.getChildren().add(tile.getHexagon());
                     tileMap.getChildren().add(numberText);
                 }
@@ -109,7 +115,6 @@ public class JavaFX extends Application {
                 numberText.setY(centery + numberText.getBoundsInLocal().getHeight() / 4);
                 Tile tile = new Tile(tileIndex++ , new Point(centerx, centery), terrain, number, size);
                 this.tiles.add(tile);
-                System.out.println(tile.getId() + " for 2 => number: " + tile.getNumber());
                 tileMap.getChildren().add(tile.getHexagon());
                 tileMap.getChildren().add(numberText);
             }
@@ -123,11 +128,12 @@ public class JavaFX extends Application {
         resource_box.setAlignment(Pos.CENTER);
         resource_box.setPadding(new Insets(10));
         resource_box.setStyle("-fx-background-color: #FFFD74;");
-        VBox brickBox = createResourceBox("brick.png", 50, "Brick", 0);
-        VBox grainBox = createResourceBox("grain.png", 50, "Grain", 0);
-        VBox lumberBox = createResourceBox("lumber.png", 50, "Lumber", 0);
-        VBox oreBox = createResourceBox("ore.png", 50, "Ore", 0);
-        VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0);
+        VBox brickBox = createResourceBox("brick.png", 50, "Brick", 0, "#b7410e"); // Brownish color for brick
+        VBox grainBox = createResourceBox("grain.png", 50, "Grain", 0, "#FFD700"); // Gold color for grain
+        VBox lumberBox = createResourceBox("lumber.png", 50, "Lumber", 0, "#228B22"); // Green color for lumber
+        VBox oreBox = createResourceBox("ore.png", 50, "Ore", 0, "#708090"); // Gray color for ore
+        VBox woolBox = createResourceBox("wool.png", 50, "Wool", 0, "#B6C9A2"); // Beige color for wool
+
         resource_box.getChildren().addAll(brickBox, grainBox, lumberBox, oreBox, woolBox);
 
         HBox dice_box = new HBox(10);
@@ -277,14 +283,21 @@ public class JavaFX extends Application {
         Collections.shuffle(numbers);
         return numbers;
     }
-    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount) {
+    private VBox createResourceBox(String imagePath, int size, String resourceName, int initialCount, String backgroundColor) {
         ImageView imageView = new ImageView(imagePath);
         imageView.setFitHeight(size);
         imageView.setFitWidth(size);
 
         Label countLabel = new Label(Integer.toString(initialCount));
+        countLabel.setFont(new Font("Arial", 20)); // Increase the font size
+        countLabel.setTextFill(Color.WHITE); // Set a text color that contrasts with the background
+        countLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 5;"); // Semi-transparent background for readability
+        countLabel.setAlignment(Pos.CENTER); // Center align the text
+
         VBox box = new VBox(5, imageView, countLabel);
         box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(10));
+        box.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
 
         return box;
     }
@@ -346,5 +359,28 @@ public class JavaFX extends Application {
 
         return cornerButton;
     }
+
+    /*
+    private Shape createRoad(Point corner1, Point corner2) {
+        double roadWidth = 8; // Width of the road
+
+        // Calculate the center point
+        double centerX = (corner1.getX() + corner2.getX()) / 2;
+        double centerY = (corner1.getY() + corner2.getY()) / 2;
+
+        // Calculate the length of the road
+        double length = Math.sqrt(Math.pow(corner2.getX() - corner1.getX(), 2) + Math.pow(corner2.getY() - corner1.getY(), 2));
+
+        // Create a rectangle to represent the road
+        Rectangle road = new Rectangle(centerX - roadWidth / 2, centerY - roadWidth / 2, roadWidth, length);
+        road.setFill(Color.BLACK); // Set road color
+
+        // Rotate the rectangle to align with the two corners
+        double angle = Math.toDegrees(Math.atan2(corner2.getY() - corner1.getY(), corner2.getX() - corner1.getX()));
+        road.setRotate(angle);
+
+        return road;
+    }
+*/
 
 }
