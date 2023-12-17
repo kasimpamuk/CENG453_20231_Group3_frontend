@@ -23,8 +23,8 @@ public class SettlementCorner {
     private List<Integer> adjacentTileIds;
     private final Pane pane;
 
-    private final double HOUSE_IMAGE_SIZE = 20;
-    private final String RED_HOUSE_IMAGE = "red-house.jpeg";
+    private final double HOUSE_IMAGE_SIZE = 25;
+    private final String RED_HOUSE_IMAGE = "green-house.jpeg";
 
     public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane) {
         this.id = id;
@@ -40,6 +40,14 @@ public class SettlementCorner {
         log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
     }
 
+    public void disableButton() {
+        button.setDisable(true);
+    }
+
+    public void enableButton() {
+        button.setDisable(false);
+    }
+
     private void buildHouse() {
         Image houseImage = new Image(RED_HOUSE_IMAGE);
         ImageView houseView = new ImageView(houseImage);
@@ -53,14 +61,6 @@ public class SettlementCorner {
         houseView.setY(this.location.getY() - HOUSE_IMAGE_SIZE / 2);
 
         this.pane.getChildren().add(houseView);
-    }
-
-    public void disableButton() {
-        button.setDisable(true);
-    }
-
-    public void enableButton() {
-        button.setDisable(false);
     }
 
     private Button createCornerButton(Point corner, EventHandler<ActionEvent> actionOnClick) {

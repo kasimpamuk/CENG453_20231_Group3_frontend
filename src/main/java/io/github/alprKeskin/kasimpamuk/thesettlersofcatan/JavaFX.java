@@ -121,8 +121,7 @@ public class JavaFX extends Application {
                 tileMap.getChildren().add(numberText);
             }
         }
-        Edge ex_edge = new Edge(0, tiles.get(10).getTopLeftCornerPoint(), tiles.get(10).getTopCornerPoint(), true);
-        tileMap.getChildren().add(ex_edge.setRoad(Color.WHITE));
+        Edge ex_edge = new Edge(0, tiles.get(10).getTopLeftCornerPoint(), tiles.get(10).getTopCornerPoint(), false, this.tileMap);
 
         // create an example road
 
@@ -226,6 +225,8 @@ public class JavaFX extends Application {
             return;
         }
     }
+
+
 
 
     private List<Integer> getAdjacentTileIdsOfCorner(Point point) {
