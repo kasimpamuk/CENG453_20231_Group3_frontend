@@ -120,13 +120,10 @@ public class JavaFX extends Application {
                 tileMap.getChildren().add(numberText);
             }
         }
-
-        createAllCornerButtons();
-
         // create an example road
         tileMap.getChildren().add(createRoad(tiles.get(0).getTopLeftCornerPoint(), tiles.get(0).getTopCornerPoint()));
 
-
+        createAllCornerButtons();
 
 
         HBox resource_box = new HBox(10);
