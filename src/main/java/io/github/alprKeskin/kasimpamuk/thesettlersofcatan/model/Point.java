@@ -2,6 +2,8 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
 import lombok.*;
 
+import static java.lang.Math.abs;
+
 @Getter
 @Setter
 @ToString
@@ -15,6 +17,7 @@ public class Point {
     public boolean equals(Object object) {
         if (object == this) return true;
         if (!(object instanceof Point point)) return false;
-        return (this.x == point.getX() && this.y == point.getY());
+        double epsilon = 0.1;
+        return ( abs(this.x - point.getX()) < epsilon && abs(this.y - point.getY()) < epsilon);
     }
 }

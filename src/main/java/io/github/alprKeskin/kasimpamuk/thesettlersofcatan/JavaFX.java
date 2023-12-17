@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.BuildingCorner;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.SettlementCorner;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
@@ -19,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
@@ -36,7 +35,7 @@ import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Ter
 
 public class JavaFX extends Application {
 
-    private List<BuildingCorner> buildingCorners = new ArrayList<BuildingCorner>();
+    private List<SettlementCorner> settlementCorners = new ArrayList<SettlementCorner>();
     private List<Tile> tiles = new ArrayList<Tile>();
     private final List<Terrain> terrains = createTerrainList();
     private final List<Integer> terrainNumbers = createNumberList();
@@ -126,6 +125,7 @@ public class JavaFX extends Application {
         createAllCornerButtons();
 
 
+
         HBox resource_box = new HBox(10);
         resource_box.setAlignment(Pos.CENTER);
         resource_box.setPadding(new Insets(10));
@@ -162,8 +162,8 @@ public class JavaFX extends Application {
         primaryStage.show();
     }
 
-    private void createSettlementButton() {
-        // code...
+    private SettlementCorner createSettlementButton(int id, Point point, List<Integer> adjacentTileIds) {
+        return new SettlementCorner(id, point, adjacentTileIds);
     }
 
     private void createTileButtons(Tile tile, boolean isEvenRow, boolean isEvenColumn, int tileId) {
@@ -171,31 +171,26 @@ public class JavaFX extends Application {
 
             Point cornerPoint;
             if (tileId == 11) {
-                // create only top left corner button
-                cornerPoint = tile.getTopLeftCornerPoint();
-                Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(cornerButton);
+                SettlementCorner settlementCorner = createSettlementButton(0, tile.getTopLeftCornerPoint(), getAdjacentTileIdsOfCorner(tile.getTopLeftCornerPoint()));
+                this.tileMap.getChildren().add(settlementCorner.getButton());
                 return;
             }
             if (tileId == 17) {
                 // create only top right corner button
-                cornerPoint = tile.getTopRightCornerPoint();
-                Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(cornerButton);
+                SettlementCorner settlementCorner = createSettlementButton(0, tile.getTopRightCornerPoint(), getAdjacentTileIdsOfCorner(tile.getTopRightCornerPoint()));
+                this.tileMap.getChildren().add(settlementCorner.getButton());
                 return;
             }
             if (tileId == 12) {
                 // create only bottom left corner button
-                cornerPoint = tile.getBottomLeftCornerPoint();
-                Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(cornerButton);
+                SettlementCorner settlementCorner = createSettlementButton(0, tile.getBottomLeftCornerPoint(), getAdjacentTileIdsOfCorner(tile.getBottomLeftCornerPoint()));
+                this.tileMap.getChildren().add(settlementCorner.getButton());
                 return;
             }
             if (tileId == 18) {
                 // create only bottom right corner button
-                cornerPoint = tile.getBottomRightCornerPoint();
-                Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(cornerButton);
+                SettlementCorner settlementCorner = createSettlementButton(0, tile.getBottomRightCornerPoint(), getAdjacentTileIdsOfCorner(tile.getBottomRightCornerPoint()));
+                this.tileMap.getChildren().add(settlementCorner.getButton());
                 return;
             }
             else {
@@ -207,26 +202,42 @@ public class JavaFX extends Application {
             if (isEvenColumn) {
                 // create all corner buttons
                 for (int i = 0; i < 6; i++) {
-                    Point cornerPoint = tile.getCorners().get(i);
-                    Button cornerButton = createCornerButton(cornerPoint, e -> rollDice());
-                    this.tileMap.getChildren().add(cornerButton);
+                    SettlementCorner settlementCorner = createSettlementButton(0, tile.getCorners().get(i), getAdjacentTileIdsOfCorner(tile.getCorners().get(i)));
+                    this.tileMap.getChildren().add(settlementCorner.getButton());
                 }
             }
             else {
                 // create only top and bottom buttons
                 Point topCornerPoint = tile.getTopCornerPoint();
-                Button topCornerButton = createCornerButton(topCornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(topCornerButton);
+                SettlementCorner settlementCorner = createSettlementButton(0, topCornerPoint, getAdjacentTileIdsOfCorner(topCornerPoint));
+                this.tileMap.getChildren().add(settlementCorner.getButton());
 
                 Point bottomCornerPoint = tile.getBottomCornerPoint();
-                Button bottomCornerButton = createCornerButton(bottomCornerPoint, e -> rollDice());
-                this.tileMap.getChildren().add(bottomCornerButton);
+                SettlementCorner settlementCorner1 = createSettlementButton(0, bottomCornerPoint, getAdjacentTileIdsOfCorner(bottomCornerPoint));
+                this.tileMap.getChildren().add(settlementCorner1.getButton());
             }
             return;
         }
         else {
             return;
         }
+    }
+
+
+    private List<Integer> getAdjacentTileIdsOfCorner(Point point) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < this.tiles.size(); i++) {
+            Tile tile = this.tiles.get(i);
+            for (int j = 0; j < tile.getCorners().size(); j++) {
+                if (point.equals(tile.getCorners().get(j))) {
+                    result.add(tile.getId());
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        return result;
     }
 
     private void createAllCornerButtons() {
