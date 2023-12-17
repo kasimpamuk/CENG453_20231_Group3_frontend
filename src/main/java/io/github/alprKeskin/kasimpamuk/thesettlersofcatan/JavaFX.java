@@ -157,7 +157,7 @@ public class JavaFX extends Application {
     }
 
     private SettlementCorner createSettlementButton(int id, Point point, List<Integer> adjacentTileIds) {
-        return new SettlementCorner(id, point, adjacentTileIds);
+        return new SettlementCorner(id, point, adjacentTileIds, this.tileMap);
     }
 
     private void createTileButtons(Tile tile, boolean isEvenRow, boolean isEvenColumn, int tileId) {

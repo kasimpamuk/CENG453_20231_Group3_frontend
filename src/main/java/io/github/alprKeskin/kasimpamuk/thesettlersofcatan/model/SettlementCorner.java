@@ -3,33 +3,56 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class SettlementCorner {
 
     private int id;
     private Point location;
     private Button button;
     private List<Integer> adjacentTileIds;
+    private final Pane pane;
 
-    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds) {
+    private final double HOUSE_IMAGE_SIZE = 20;
+    private final String RED_HOUSE_IMAGE = "red-house.jpeg";
+
+    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane) {
         this.id = id;
         this.location = location;
         this.button = createCornerButton(location, (e) -> clickAction());
         this.adjacentTileIds = adjacentTileIds;
+        this.pane = pane;
     }
 
     public void clickAction() {
         // TODO: Implement logic...
-        for (int i = 0; i < adjacentTileIds.size(); i++) {
-            System.out.println(adjacentTileIds.get(i));
-        }
+        this.buildHouse();
+        log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
+    }
+
+    private void buildHouse() {
+        Image houseImage = new Image(RED_HOUSE_IMAGE);
+        ImageView houseView = new ImageView(houseImage);
+
+        // Assuming the image is a square, adjust size as needed
+        houseView.setFitHeight(HOUSE_IMAGE_SIZE);
+        houseView.setFitWidth(HOUSE_IMAGE_SIZE);
+
+        // Position the image at the corner, adjusting such that it's centered on the point
+        houseView.setX(this.location.getX() - HOUSE_IMAGE_SIZE / 2);
+        houseView.setY(this.location.getY() - HOUSE_IMAGE_SIZE / 2);
+
+        this.pane.getChildren().add(houseView);
     }
 
     public void disableButton() {
@@ -89,5 +112,4 @@ public class SettlementCorner {
 
         return cornerButton;
     }
-
 }
