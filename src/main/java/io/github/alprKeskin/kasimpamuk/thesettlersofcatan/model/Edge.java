@@ -22,7 +22,6 @@ public class Edge {
     private Shape road;
     private Button button;
     private final Pane pane;
-    private int buttonIndex;
 
     public Edge(int id, Point location1, Point location2, boolean isRoad, Pane pane) {
         this.id = id;
@@ -44,7 +43,7 @@ public class Edge {
 
     private void clickAction() {
         this.pane.getChildren().add(setRoad(Color.WHITE));
-        pane.getChildren().remove(this.buttonIndex);
+        pane.getChildren().remove(this.button);
         this.button = null;
         System.out.println("Road button clicked!");
     }
@@ -97,7 +96,6 @@ public class Edge {
         // Set the action to be performed on click
         roadButton.setOnAction(actionOnClick);
         this.pane.getChildren().add(roadButton);
-        this.buttonIndex = this.pane.getChildren().size() - 1;
 
         return roadButton;
     }

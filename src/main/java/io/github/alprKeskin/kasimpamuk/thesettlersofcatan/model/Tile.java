@@ -18,7 +18,6 @@ public class Tile {
     private final Terrain terrain;
     private final int number;
     private List<Point> corners;
-    //private Edge[] edges;
     static int cornerId = 0;
     static int edgeId = 0;
     private Polygon hexagon;

@@ -18,7 +18,7 @@ public class RegisterWindow {
         this.pane = new GridPane();
     }
 
-    public void displayRegisterWindow() {
+    public void display() {
 
         initializeWindowConfigurations();
 
