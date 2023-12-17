@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Edge;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.SettlementCorner;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
@@ -11,12 +12,17 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -115,6 +121,10 @@ public class JavaFX extends Application {
                 tileMap.getChildren().add(numberText);
             }
         }
+        Edge ex_edge = new Edge(0, tiles.get(10).getTopLeftCornerPoint(), tiles.get(10).getTopCornerPoint(), true);
+        tileMap.getChildren().add(ex_edge.setRoad(Color.WHITE));
+
+        // create an example road
 
         createAllCornerButtons();
 
@@ -317,77 +327,4 @@ public class JavaFX extends Application {
         dice1.setImage(new Image("dice" + diceValue1 + ".png"));
         dice2.setImage(new Image("dice" + diceValue2 + ".png"));
     }
-    private Button createCornerButton(Point corner, EventHandler<ActionEvent> actionOnClick) {
-        double buttonSize = 7;
-
-        Button cornerButton = new Button("");
-        cornerButton.setMinSize(buttonSize, buttonSize);
-        cornerButton.setMaxSize(buttonSize, buttonSize);
-
-        // Position the button at the corner
-        cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-        cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-
-        // Initial style
-        cornerButton.setStyle("-fx-background-radius: 10; " +
-                "-fx-background-color: orange; " +
-                "-fx-border-color: black; " +
-                "-fx-border-width: 2; " +
-                "-fx-cursor: hand;");
-
-        // Hover effect - increase size
-        cornerButton.setOnMouseEntered(e -> {
-            cornerButton.setMinSize(buttonSize + 10, buttonSize + 10);
-            cornerButton.setMaxSize(buttonSize + 10, buttonSize + 10);
-            cornerButton.setLayoutX(cornerButton.getLayoutX() - 5);
-            cornerButton.setLayoutY(cornerButton.getLayoutY() - 5);
-            cornerButton.setStyle("-fx-background-radius: 15; " +
-                    "-fx-background-color: #ff0000; " +
-                    "-fx-border-color: black; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-cursor: hand;");
-        });
-
-        // Hover effect - revert to original size
-        cornerButton.setOnMouseExited(e -> {
-            cornerButton.setMinSize(buttonSize, buttonSize);
-            cornerButton.setMaxSize(buttonSize, buttonSize);
-            cornerButton.setLayoutX(corner.getX() - buttonSize / 2);
-            cornerButton.setLayoutY(corner.getY() - buttonSize / 2);
-            cornerButton.setStyle("-fx-background-radius: 10; " +
-                    "-fx-background-color: orange; " +
-                    "-fx-border-color: black; " +
-                    "-fx-border-width: 2; " +
-                    "-fx-cursor: hand;");
-        });
-
-        // Set the action to be performed on click
-        cornerButton.setOnAction(actionOnClick);
-
-        return cornerButton;
-    }
-
-    /*
-    private Shape createRoad(Point corner1, Point corner2) {
-        double roadWidth = 8; // Width of the road
-
-        // Calculate the center point
-        double centerX = (corner1.getX() + corner2.getX()) / 2;
-        double centerY = (corner1.getY() + corner2.getY()) / 2;
-
-        // Calculate the length of the road
-        double length = Math.sqrt(Math.pow(corner2.getX() - corner1.getX(), 2) + Math.pow(corner2.getY() - corner1.getY(), 2));
-
-        // Create a rectangle to represent the road
-        Rectangle road = new Rectangle(centerX - roadWidth / 2, centerY - roadWidth / 2, roadWidth, length);
-        road.setFill(Color.BLACK); // Set road color
-
-        // Rotate the rectangle to align with the two corners
-        double angle = Math.toDegrees(Math.atan2(corner2.getY() - corner1.getY(), corner2.getX() - corner1.getX()));
-        road.setRotate(angle);
-
-        return road;
-    }
-*/
-
 }
