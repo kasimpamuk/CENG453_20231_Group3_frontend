@@ -18,6 +18,7 @@ public class DiceBox {
     private ImageView dice1, dice2;
     private HBox diceBox;
     private Button button;
+    private int diceValue;
 
     public DiceBox() {
         createDiceBox();
@@ -50,6 +51,8 @@ public class DiceBox {
 
         dice1.setImage(new Image("dice" + diceValue1 + ".png"));
         dice2.setImage(new Image("dice" + diceValue2 + ".png"));
+        diceValue = diceValue1 + diceValue2;
+        System.out.println("Dice rolled: " + diceValue);
     }
 
     private ImageView generateDice(String iconName, Integer height, Integer width) {

@@ -21,6 +21,8 @@ public class Tile {
     static int cornerId = 0;
     static int edgeId = 0;
     private Polygon hexagon;
+    private List<Integer> adjacentCornerIds = new ArrayList<>();
+
 
     public Tile(int id, Point center, Terrain terrain, int number, int edgeSize) {
         this.id = id;

@@ -23,8 +23,8 @@ import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Ter
 @NoArgsConstructor
 public class GameBoardWindow {
 
-    private final int WIDTH = 1000;
-    private final int HEIGHT = 1000;
+    private final int WIDTH = 700;
+    private final int HEIGHT = 700;
     private final int TILE_EDGE_SIZE = 50;
     private Point BOARD_CENTER;
 
@@ -38,6 +38,7 @@ public class GameBoardWindow {
     private final List<Integer> tileNumbers = createNumberList();
 
     private TileService tileService;
+
 
     public void display() {
         initializeTileMap();
@@ -101,20 +102,21 @@ public class GameBoardWindow {
         return numbers;
     }
 
-    private SettlementCorner createSettlementButton(Point point) {
-        List<Integer> adjacentTileIds = getAdjacentTileIdsOfCorner(point);
-        SettlementCorner settlementCorner = new SettlementCorner(0, point, adjacentTileIds, this.tileMap);
+    private SettlementCorner createSettlementButton(int cornerId, Point point) {
+        List<Integer> adjacentTileIds = getAdjacentTileIdsOfCorner(point, cornerId);
+        SettlementCorner settlementCorner = new SettlementCorner(cornerId, point, adjacentTileIds, this.tileMap);
         this.tileMap.getChildren().add(settlementCorner.getButton());
         return settlementCorner;
     }
 
-    private List<Integer> getAdjacentTileIdsOfCorner(Point point) {
+    private List<Integer> getAdjacentTileIdsOfCorner(Point point, int cornerId) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < this.tiles.size(); i++) {
             Tile tile = this.tiles.get(i);
             for (int j = 0; j < tile.getCorners().size(); j++) {
                 if (point.equals(tile.getCorners().get(j))) {
                     result.add(tile.getId());
+                    tile.getAdjacentCornerIds().add(cornerId);
                 }
                 else {
                     continue;
@@ -127,27 +129,28 @@ public class GameBoardWindow {
     private void createAllCornerButtons() {
         List<Integer> tileList1 = new ArrayList<>(Arrays.asList(0, 2, 7, 9, 11, 16, 18));
         List<Integer> tileList2 = new ArrayList<>(Arrays.asList(1, 8, 10, 17));
+        int cornerId = 0;
 
         for (int i = 0; i < tileList1.size(); i++) {
             int tileId = tileList1.get(i);
             Tile tile = this.tiles.get(tileId);
             // create all corner buttons
             for (int j = 0; j < 6; j++) {
-                SettlementCorner settlementCorner = createSettlementButton(tile.getCorners().get(j));
+                SettlementCorner settlementCorner = createSettlementButton(cornerId++, tile.getCorners().get(j));
             }
         }
 
         for (int i = 0; i < tileList2.size(); i++) {
             int tileId = tileList2.get(i);
             Tile tile = this.tiles.get(tileId);
-            createSettlementButton(tile.getTopCornerPoint());
-            createSettlementButton(tile.getBottomCornerPoint());
+            createSettlementButton(cornerId++, tile.getTopCornerPoint());
+            createSettlementButton(cornerId++, tile.getBottomCornerPoint());
         }
 
-        createSettlementButton(this.tiles.get(3).getTopLeftCornerPoint());
-        createSettlementButton(this.tiles.get(6).getTopRightCornerPoint());
-        createSettlementButton(this.tiles.get(12).getBottomLeftCornerPoint());
-        createSettlementButton(this.tiles.get(15).getBottomRightCornerPoint());
+        createSettlementButton(cornerId++, this.tiles.get(3).getTopLeftCornerPoint());
+        createSettlementButton(cornerId++, this.tiles.get(6).getTopRightCornerPoint());
+        createSettlementButton(cornerId++, this.tiles.get(12).getBottomLeftCornerPoint());
+        createSettlementButton(cornerId, this.tiles.get(15).getBottomRightCornerPoint());
     }
 
 }
