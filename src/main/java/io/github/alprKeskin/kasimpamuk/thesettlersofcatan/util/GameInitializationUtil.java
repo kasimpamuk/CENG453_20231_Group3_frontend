@@ -34,5 +34,6 @@ public class GameInitializationUtil {
 		Collections.shuffle(numbers);
 		return numbers;
 	}
+	// Placeholder
 
 }
