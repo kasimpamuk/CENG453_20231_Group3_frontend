@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8f92681-0fd5-44c5-92d6-8dcb30f30f24" name="Changes" comment="dev: add resource images">
+    <list default="true" id="f8f92681-0fd5-44c5-92d6-8dcb30f30f24" name="Changes" comment="refactor: distribute functionalities to related services">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/alprKeskin/kasimpamuk/thesettlersofcatan/JavaFX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="refactor-branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +57,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;kasim&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactor-branch-alper&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/kasim/IdeaProjects/CENG453_20231_Group3_frontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -106,6 +107,8 @@
       <workItem from="1702666313321" duration="7370000" />
       <workItem from="1702680145377" duration="977000" />
       <workItem from="1702726820654" duration="3960000" />
+      <workItem from="1703436808070" duration="3847000" />
+      <workItem from="1703443996984" duration="158000" />
     </task>
     <task id="LOCAL-00001" summary="initialize Spring Boot project">
       <option name="closed" value="true" />
@@ -195,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702732784882</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactor: distribute functionalities to related services">
+      <option name="closed" value="true" />
+      <created>1703440649964</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703440649964</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +247,8 @@
     <MESSAGE value="dev: adjust landscape colors" />
     <MESSAGE value="dev: create bottom console for resources and dices" />
     <MESSAGE value="dev: add resource images" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev: add resource images" />
+    <MESSAGE value="refactor: distribute functionalities to related services" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: distribute functionalities to related services" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
