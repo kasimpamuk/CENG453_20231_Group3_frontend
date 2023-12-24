@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameBoardWindow;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
