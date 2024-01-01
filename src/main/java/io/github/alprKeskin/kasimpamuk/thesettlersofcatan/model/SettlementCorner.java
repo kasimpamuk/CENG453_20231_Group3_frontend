@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.House;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -18,27 +19,30 @@ import java.util.List;
 @Slf4j
 public class SettlementCorner {
 
+    private final double HOUSE_IMAGE_SIZE = 25;
+
     private int id;
     private Point location;
-    private Button button;
+    private House house;
     private List<Integer> adjacentTileIds;
+
     private final Pane pane;
+    private Button button;
 
-    private final double HOUSE_IMAGE_SIZE = 25;
-    private final String RED_HOUSE_IMAGE = "green-house.jpeg";
 
-    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane) {
+    public SettlementCorner(int id, Point location, House house, List<Integer> adjacentTileIds, Pane pane) {
         this.id = id;
         this.location = location;
+        this.house = house;
         this.button = createCornerButton(location, (e) -> clickAction());
         this.adjacentTileIds = adjacentTileIds;
         this.pane = pane;
     }
 
     public void clickAction() {
-        // TODO: Implement logic...
         this.buildHouse();
         log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
+        log.info("button disable: " + this.button.isDisabled());
     }
 
     public void disableButton() {
@@ -50,7 +54,7 @@ public class SettlementCorner {
     }
 
     private void buildHouse() {
-        Image houseImage = new Image(RED_HOUSE_IMAGE);
+        Image houseImage = new Image(house.getHouse());
         ImageView houseView = new ImageView(houseImage);
 
         // Assuming the image is a square, adjust size as needed

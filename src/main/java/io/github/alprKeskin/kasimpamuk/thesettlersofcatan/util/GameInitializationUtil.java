@@ -26,13 +26,18 @@ public class GameInitializationUtil {
 	}
 
 	public static ArrayList<Integer> createNumberList() {
-		ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(2, 12));
-		for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) {
-			numbers.add(number);
-			numbers.add(number);
-		}
-		Collections.shuffle(numbers);
-		return numbers;
+		return getIdMocks();
+//		ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(2, 12));
+//		for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) {
+//			numbers.add(number);
+//			numbers.add(number);
+//		}
+//		Collections.shuffle(numbers);
+//		return numbers;
+	}
+
+	private static ArrayList<Integer> getIdMocks() {
+		return new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18));
 	}
 
 }

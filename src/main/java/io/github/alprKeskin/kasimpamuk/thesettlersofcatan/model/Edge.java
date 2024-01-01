@@ -10,18 +10,26 @@ import javafx.scene.shape.Shape;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Setter
 @ToString
+@Slf4j
 public class Edge {
+
     private int id;
     private Point location1;
     private Point location2;
+
+    private SettlementCorner settlementCorner1;
+    private SettlementCorner settlementCorner2;
+
     private boolean isRoad;
     private Shape road;
-    private Button button;
+
     private final Pane pane;
+    private Button button;
 
     public Edge(int id, Point location1, Point location2, boolean isRoad, Pane pane) {
         this.id = id;
@@ -30,7 +38,6 @@ public class Edge {
         this.isRoad = isRoad;
         this.pane = pane;
         this.button = createRoadButton((e) -> clickAction());
-        System.out.println(this.pane.getChildren());
     }
     public Edge(int id, Point location1, Point location2, Pane pane) {
         this.id = id;
@@ -45,7 +52,7 @@ public class Edge {
         this.pane.getChildren().add(setRoad(Color.WHITE));
         pane.getChildren().remove(this.button);
         this.button = null;
-        System.out.println("Road button clicked!");
+        log.info("Road button clicked!");
     }
 
     private Button createRoadButton(EventHandler<ActionEvent> actionOnClick) {
@@ -95,7 +102,6 @@ public class Edge {
 
         // Set the action to be performed on click
         roadButton.setOnAction(actionOnClick);
-        this.pane.getChildren().add(roadButton);
 
         return roadButton;
     }

@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;

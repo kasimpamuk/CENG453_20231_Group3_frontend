@@ -1,17 +1,13 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.TileService;
-import javafx.geometry.Pos;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component.BottomConsole;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component.TileMap;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.*;
 
 @Getter
 @Setter

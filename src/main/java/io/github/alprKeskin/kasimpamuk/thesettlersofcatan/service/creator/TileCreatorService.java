@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain.DESERT;
@@ -31,33 +32,51 @@ public class TileCreatorService {
 		BOARD_CENTER = boardCenter;
 	}
 
-	public void createAllTiles() {
+	public List<Tile> createAllTiles() {
+		List<Tile> allTiles = new ArrayList<>();
 		double distanceFromCenterToEdge = TILE_EDGE_SIZE * Math.sqrt(3) / 2;
 
-		createTilesRow(3, 0, new Point(BOARD_CENTER.getX() - 2 * distanceFromCenterToEdge, BOARD_CENTER.getY() - 3 * TILE_EDGE_SIZE));
-		createTilesRow(4, 3, new Point(BOARD_CENTER.getX() - 3 * distanceFromCenterToEdge, BOARD_CENTER.getY() - 1.5 * TILE_EDGE_SIZE));
-		createTilesRow(5, 7, new Point(BOARD_CENTER.getX() - 4 * distanceFromCenterToEdge, BOARD_CENTER.getY()));
-		createTilesRow(4, 12, new Point(BOARD_CENTER.getX() - 3 * distanceFromCenterToEdge, BOARD_CENTER.getY() + 1.5 * TILE_EDGE_SIZE));
-		createTilesRow(3, 16, new Point(BOARD_CENTER.getX() - 2 * distanceFromCenterToEdge, BOARD_CENTER.getY() + 3 * TILE_EDGE_SIZE));
+		allTiles.addAll(
+			createTilesRow(3, 0, new Point(BOARD_CENTER.getX() - 2 * distanceFromCenterToEdge, BOARD_CENTER.getY() - 3 * TILE_EDGE_SIZE))
+		);
+		allTiles.addAll(
+			createTilesRow(4, 3, new Point(BOARD_CENTER.getX() - 3 * distanceFromCenterToEdge, BOARD_CENTER.getY() - 1.5 * TILE_EDGE_SIZE))
+		);
+		allTiles.addAll(
+			createTilesRow(5, 7, new Point(BOARD_CENTER.getX() - 4 * distanceFromCenterToEdge, BOARD_CENTER.getY()))
+		);
+		allTiles.addAll(
+			createTilesRow(4, 12, new Point(BOARD_CENTER.getX() - 3 * distanceFromCenterToEdge, BOARD_CENTER.getY() + 1.5 * TILE_EDGE_SIZE))
+		);
+		allTiles.addAll(
+			createTilesRow(3, 16, new Point(BOARD_CENTER.getX() - 2 * distanceFromCenterToEdge, BOARD_CENTER.getY() + 3 * TILE_EDGE_SIZE))
+		);
+
+		return allTiles;
 	}
 
-	private void createTilesRow(int numberOfTiles, int startId, Point startPoint) {
+	private List<Tile> createTilesRow(int numberOfTiles, int startId, Point startPoint) {
+		List<Tile> tilesInRow = new ArrayList<>();
 		for (int i = 0; i < numberOfTiles; i++) {
 			int id = startId + i;
 			double distanceFromCenterToEdge = TILE_EDGE_SIZE * Math.sqrt(3) / 2;
 			Point center = new Point(startPoint.getX() + i * distanceFromCenterToEdge * 2, startPoint.getY());
 			if (id == 9) {
-				createTile(id, DESERT, 0, center);
+				Tile tile = createTile(id, DESERT, 0, center);
+				tilesInRow.add(tile);
 			}
 			else {
 				if (id > 9) {
-					createTile(id, terrains.get(id - 1), tileNumbers.get(id - 1), center);
+					Tile tile = createTile(id, terrains.get(id - 1), tileNumbers.get(id - 1), center);
+					tilesInRow.add(tile);
 				}
 				else {
-					createTile(id, terrains.get(id), tileNumbers.get(id), center);
+					Tile tile = createTile(id, terrains.get(id), tileNumbers.get(id), center);
+					tilesInRow.add(tile);
 				}
 			}
 		}
+		return tilesInRow;
 	}
 
 	private Tile createTile(int id, Terrain terrain, int number, Point center) {
