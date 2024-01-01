@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -65,6 +66,16 @@ public class MenuWindow {
 
         VBox vBox = new VBox();
         TitledPane centerPane = new TitledPane();
+
+        //add catan logo
+        ImageView catanLogo = new ImageView("catan_logo.png");
+        catanLogo.setFitHeight(200);
+        catanLogo.setFitWidth(200);
+        catanLogo.setPreserveRatio(true);
+        catanLogo.setSmooth(true);
+        catanLogo.setCache(true);
+
+        vBox.getChildren().add(catanLogo);
 
         centerPane.setText("Welcome to Catan");
         centerPane.setCollapsible(false);
