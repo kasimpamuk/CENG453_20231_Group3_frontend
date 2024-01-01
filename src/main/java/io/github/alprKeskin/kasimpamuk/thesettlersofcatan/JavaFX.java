@@ -1,15 +1,13 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.GameBoard;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.RegisterWindow;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.MenuWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lombok.Getter;
 
-@Getter
 public class JavaFX extends Application {
 
-    public static final RegisterWindow registerWindow = new RegisterWindow();
+    public static final MenuWindow registerWindow = new MenuWindow();
 
     private final GameBoard gameBoard = new GameBoard();
 

@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 import lombok.Getter;
 
 @Getter
-public class RegisterWindow {
+public class MenuWindow {
 
     private final GridPane pane;
     private Scene registerScene;
 
-    public RegisterWindow() {
+    public MenuWindow() {
         this.pane = new GridPane();
         this.registerScene = new Scene(this.pane, 700, 700);
     }
