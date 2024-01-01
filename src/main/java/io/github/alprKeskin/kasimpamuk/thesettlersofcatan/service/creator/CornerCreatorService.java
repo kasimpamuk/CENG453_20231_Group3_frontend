@@ -19,23 +19,50 @@ public class CornerCreatorService {
 
 	private final Pane tileMap;
 	private final List<Tile> tiles;
+	private List<SettlementCorner> settlementCorners = new ArrayList<>();
+
+	private final int[][] cornerTileMatrix = new int[19][54];
+
 
 	public CornerCreatorService(Pane tileMap, List<Tile> tiles) {
 		this.tileMap = tileMap;
 		this.tiles = tiles;
+		for(int i = 0; i < 19; i++) {
+			for(int j = 0; j < 54; j++) {
+				cornerTileMatrix[i][j] = 0;
+			}
+		}
+	}
+
+	public void createCornerTileMatrix() {
+		for(int i = 0; i < 19; i++) {
+			for(int j = 0; j < 54; j++) {
+				for (int k = 0; k < 6; k++) {
+					if (this.tiles.get(i).getCorners().get(k).equals(this.settlementCorners.get(j).getLocation())) {
+						cornerTileMatrix[i][j] = 1;
+					}
+				}
+			}
+		}
+		for(int i = 0; i < 19; i++) {
+			for(int j = 0; j < 54; j++) {
+				System.out.print(cornerTileMatrix[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 
 	public List<SettlementCorner> createAllSettlementCorners() {
 		List<Integer> tileList1 = new ArrayList<>(Arrays.asList(0, 2, 7, 9, 11, 16, 18));
 		List<Integer> tileList2 = new ArrayList<>(Arrays.asList(1, 8, 10, 17));
 
-		List<SettlementCorner> settlementCorners = new ArrayList<>();
 
 		for (int i = 0; i < tileList1.size(); i++) {
 			int tileId = tileList1.get(i);
 			Tile tile = this.tiles.get(tileId);
 			// create all corner buttons
 			for (int j = 0; j < 6; j++) {
+		//		cornerTileMatrix[tileId][SettlementCorner.cornerId] = 1;
 				SettlementCorner settlementCorner = createSettlementButton(tile.getCorners().get(j));
 				settlementCorners.add(settlementCorner);
 			}
@@ -45,20 +72,22 @@ public class CornerCreatorService {
 			int tileId = tileList2.get(i);
 			Tile tile = this.tiles.get(tileId);
 			settlementCorners.add( createSettlementButton(tile.getTopCornerPoint()) );
+
 			settlementCorners.add( createSettlementButton(tile.getBottomCornerPoint()) );
 		}
-
 		settlementCorners.add( createSettlementButton(this.tiles.get(3).getTopLeftCornerPoint()) );
 		settlementCorners.add( createSettlementButton(this.tiles.get(6).getTopRightCornerPoint()) );
 		settlementCorners.add( createSettlementButton(this.tiles.get(12).getBottomLeftCornerPoint()) );
 		settlementCorners.add( createSettlementButton(this.tiles.get(15).getBottomRightCornerPoint()) );
+		System.out.println("settlementCorners count: " + SettlementCorner.cornerId);
 
+		createCornerTileMatrix();
 		return settlementCorners;
 	}
 
 	private SettlementCorner createSettlementButton(Point point) {
 		List<Integer> adjacentTileIds = getAdjacentTileIdsOfCorner(point);
-		SettlementCorner settlementCorner = new SettlementCorner(0, point, RED_HOUSE, adjacentTileIds, this.tileMap);
+		SettlementCorner settlementCorner = new SettlementCorner(SettlementCorner.cornerId++, point, adjacentTileIds, this.tileMap);
 		this.tileMap.getChildren().add(settlementCorner.getButton());
 		return settlementCorner;
 	}
