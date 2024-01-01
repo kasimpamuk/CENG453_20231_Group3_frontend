@@ -4,20 +4,22 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.GameB
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.RegisterWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import lombok.Getter;
 
+@Getter
 public class JavaFX extends Application {
 
-    private final RegisterWindow registerWindow = new RegisterWindow();
+    public static final RegisterWindow registerWindow = new RegisterWindow();
 
     private final GameBoard gameBoard = new GameBoard();
 
     @Override
     public void start(Stage primaryStage) {
-        this.registerWindow.display();
-        this.gameBoard.display();
+        registerWindow.display();
+        //this.gameBoard.display();
 
-        primaryStage.setTitle("Catan Board");
-        primaryStage.setScene(gameBoard.getCatanScene());
+        primaryStage.setTitle("Main Menu");
+        primaryStage.setScene(registerWindow.getRegisterScene());
 
         primaryStage.show();
     }

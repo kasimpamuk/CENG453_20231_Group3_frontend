@@ -118,7 +118,7 @@ public class Edge {
 
     private Shape createRoad(Color color) {
         double roadWidth = 8; // Width of the road
-        double shrinkFactor = 10; // Distance to shrink the road from each corner
+        double shrinkFactor = 15; // Distance to shrink the road from each corner
 
         // Calculate the direction vector from start to end
         double dx = this.location2.getX() - this.location1.getX();
