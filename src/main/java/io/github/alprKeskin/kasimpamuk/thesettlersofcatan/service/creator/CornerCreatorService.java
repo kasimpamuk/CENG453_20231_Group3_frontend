@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.House.RED_HOUSE;
-
 @Getter
 @Setter
 public class CornerCreatorService {
@@ -77,6 +75,7 @@ public class CornerCreatorService {
 		settlementCorners.add( createSettlementButton(this.tiles.get(12).getBottomLeftCornerPoint()) );
 		settlementCorners.add( createSettlementButton(this.tiles.get(15).getBottomRightCornerPoint()) );
 		System.out.println("settlementCorners count: " + SettlementCorner.cornerId);
+		SettlementCorner.cornerId = 0;
 
 		createCornerTileMatrix();
 		return settlementCorners;
