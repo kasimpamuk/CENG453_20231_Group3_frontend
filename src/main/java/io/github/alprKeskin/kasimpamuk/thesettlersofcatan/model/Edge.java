@@ -49,7 +49,7 @@ public class Edge {
     }
 
     private void clickAction() {
-        this.pane.getChildren().add(setRoad(Color.WHITE));
+        this.pane.getChildren().add(setRoad(Color.RED));
         pane.getChildren().remove(this.button);
         this.button = null;
         log.info("Road button clicked!");
@@ -138,6 +138,11 @@ public class Edge {
         road.setStrokeWidth(roadWidth);
         road.setStroke(color);
 
+        Line road2 = new Line(startX, startY, endX, endY);
+        road2.setStrokeWidth(roadWidth+3);
+        road2.setStroke(Color.BLACK);
+
+        this.pane.getChildren().add(road2);
         return road;
     }
 
