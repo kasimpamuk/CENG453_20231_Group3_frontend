@@ -23,7 +23,7 @@ public class TileMapService {
 
     private final Pane tileMapPane;
     private List<Tile> tiles;
-    private List<SettlementCorner> settlementCorners;
+    public static List<SettlementCorner> settlementCorners;
     private List<Edge> edges;
 
     private final List<Terrain> terrains;

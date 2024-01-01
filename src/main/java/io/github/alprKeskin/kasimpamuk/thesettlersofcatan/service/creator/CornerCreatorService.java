@@ -21,22 +21,18 @@ public class CornerCreatorService {
 	private final List<Tile> tiles;
 	private List<SettlementCorner> settlementCorners = new ArrayList<>();
 
-	private final int[][] cornerTileMatrix = new int[19][54];
+	private int[][] cornerTileMatrix = new int[19][54]; // 19 tiles, 54 corners
 
 
 	public CornerCreatorService(Pane tileMap, List<Tile> tiles) {
 		this.tileMap = tileMap;
 		this.tiles = tiles;
-		for(int i = 0; i < 19; i++) {
-			for(int j = 0; j < 54; j++) {
-				cornerTileMatrix[i][j] = 0;
-			}
-		}
 	}
 
 	public void createCornerTileMatrix() {
 		for(int i = 0; i < 19; i++) {
 			for(int j = 0; j < 54; j++) {
+				cornerTileMatrix[i][j] = 0;
 				for (int k = 0; k < 6; k++) {
 					if (this.tiles.get(i).getCorners().get(k).equals(this.settlementCorners.get(j).getLocation())) {
 						cornerTileMatrix[i][j] = 1;
@@ -44,6 +40,7 @@ public class CornerCreatorService {
 				}
 			}
 		}
+		System.out.println("cornerTileMatrix");
 		for(int i = 0; i < 19; i++) {
 			for(int j = 0; j < 54; j++) {
 				System.out.print(cornerTileMatrix[i][j] + " ");

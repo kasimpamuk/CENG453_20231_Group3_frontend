@@ -20,7 +20,7 @@ import java.util.List;
 public class SettlementCorner {
 
     private final double HOUSE_IMAGE_SIZE = 25;
-
+    public static int cornerId = 0;
     private int id;
     private Point location;
     private House house;
@@ -30,10 +30,9 @@ public class SettlementCorner {
     private Button button;
 
 
-    public SettlementCorner(int id, Point location, House house, List<Integer> adjacentTileIds, Pane pane) {
+    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane) {
         this.id = id;
         this.location = location;
-        this.house = house;
         this.button = createCornerButton(location, (e) -> clickAction());
         this.adjacentTileIds = adjacentTileIds;
         this.pane = pane;
@@ -54,6 +53,7 @@ public class SettlementCorner {
     }
 
     private void buildHouse() {
+        this.house = House.RED_HOUSE;
         Image houseImage = new Image(house.getHouse());
         ImageView houseView = new ImageView(houseImage);
 
