@@ -15,8 +15,8 @@ import lombok.Setter;
 public class GameBoard {
 
     // constants
-    private final int WIDTH = 800;
-    private final int HEIGHT = 800;
+    private final int WIDTH = 750;
+    private final int HEIGHT = 750;
     private Point BOARD_CENTER = new Point((double) WIDTH / 2, (double) HEIGHT / 2);
 
     private final BorderPane boardPane = new BorderPane();

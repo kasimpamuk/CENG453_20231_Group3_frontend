@@ -1,7 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.GameBoard;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.MenuWindow;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.mainmanu.MenuWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
