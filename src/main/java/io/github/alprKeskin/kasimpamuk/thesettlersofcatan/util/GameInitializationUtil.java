@@ -30,7 +30,7 @@ public class GameInitializationUtil {
 		for (int number : new int[]{3, 4, 5, 6, 8, 9, 10, 11}) {
 			numbers.add(number);
 			numbers.add(number);
-}
+		}
 		Collections.shuffle(numbers);
 		return numbers;
 	}
