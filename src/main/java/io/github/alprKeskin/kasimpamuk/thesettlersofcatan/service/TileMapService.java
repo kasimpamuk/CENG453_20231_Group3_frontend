@@ -1,10 +1,10 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Edge;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.SettlementCorner;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Edge;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.SettlementCorner;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.CornerCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.EdgeCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.TileCreatorService;
@@ -12,7 +12,6 @@ import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter

@@ -1,6 +1,8 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Edge;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -9,8 +11,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.House.RED_HOUSE;
 
 @Getter
 @Setter

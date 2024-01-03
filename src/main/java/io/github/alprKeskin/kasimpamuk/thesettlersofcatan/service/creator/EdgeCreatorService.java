@@ -1,9 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Edge;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.SettlementCorner;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Edge;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.TileMapService;
 import javafx.scene.layout.Pane;
 import lombok.Getter;

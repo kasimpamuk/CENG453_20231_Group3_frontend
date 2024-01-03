@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

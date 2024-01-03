@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.SettlementCorner;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.SettlementCorner;
 import lombok.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums;
 
 import javafx.scene.paint.Color;
 import lombok.Getter;

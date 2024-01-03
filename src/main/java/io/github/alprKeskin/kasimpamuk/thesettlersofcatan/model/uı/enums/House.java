@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums;
 
 import lombok.Getter;
 

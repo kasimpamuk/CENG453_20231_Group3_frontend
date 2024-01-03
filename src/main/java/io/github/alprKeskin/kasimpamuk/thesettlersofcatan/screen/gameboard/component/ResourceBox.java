@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Resource;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Resource;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import lombok.Getter;
 
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Resource.*;
+import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Resource.*;
 @Getter
 public class ResourceBox {
     private HBox resource_box;

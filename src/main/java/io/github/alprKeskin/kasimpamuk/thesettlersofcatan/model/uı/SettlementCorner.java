@@ -1,6 +1,7 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.House;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.House;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.layout.Pane;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter

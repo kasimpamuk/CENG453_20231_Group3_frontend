@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums;
 
 import javafx.scene.paint.Color;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import lombok.Getter;
 public enum Terrain {
 
     DESERT("desert"),
+    FIELD("field"),
+    FOREST("forest"),
     HILL("hill"),
     MOUNTAIN("mountain"),
-    FOREST("forest"),
-    FIELD("field"),
     PASTURE("pasture");
 
     private final String terrainType;

@@ -1,8 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain.DESERT;
+import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain.DESERT;
 
 @Getter
 @Setter

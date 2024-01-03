@@ -1,8 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.TileMapService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.GameInitializationUtil;
 import javafx.scene.layout.Pane;

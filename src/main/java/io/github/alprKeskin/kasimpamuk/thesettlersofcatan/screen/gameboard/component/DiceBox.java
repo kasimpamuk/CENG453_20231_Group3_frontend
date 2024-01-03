@@ -1,5 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.restservice.CatanRestService;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,16 +11,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Random;
 
 @Getter
 @Setter
+@Service
 public class DiceBox {
 
     private ImageView dice1, dice2;
     private HBox diceBox;
     private Button button;
+
+    private CatanRestService catanRestService = new CatanRestService();
 
     public DiceBox() {
         createDiceBox();
@@ -50,6 +61,10 @@ public class DiceBox {
 
         dice1.setImage(new Image("dice" + diceValue1 + ".png"));
         dice2.setImage(new Image("dice" + diceValue2 + ".png"));
+
+        // TEST
+        startPollingInANewThread();
+        // TEST
     }
 
     private ImageView generateDice(String iconName, Integer height, Integer width) {
@@ -57,6 +72,33 @@ public class DiceBox {
         dice.setFitHeight(height);
         dice.setFitWidth(width);
         return dice;
+    }
+
+    private void startPollingInANewThread() {
+        Task<InitialResponseDTO> pollingTask = new Task<>() {
+            @Override
+            protected InitialResponseDTO call() throws Exception {
+                return catanRestService.sendGetRequestByPolling(new URI("http://localhost:8080/api/catan/test-get"));
+            }
+        };
+
+        pollingTask.setOnSucceeded(event -> {
+            // This will be executed on the JavaFX Application Thread
+            InitialResponseDTO response = pollingTask.getValue();
+            // Update your UI based on the response
+            this.diceBox.setStyle("-fx-background-color: #000000;"); // TODO: Do not forget to delete
+            System.out.println("YEPPPPP!");
+        });
+
+        pollingTask.setOnFailed(event -> {
+            // Handle any exceptions
+            Throwable e = pollingTask.getException();
+            e.printStackTrace();
+            // Update UI to reflect the error
+        });
+
+        // Start the task on a new thread
+        new Thread(pollingTask).start();
     }
 
 }
