@@ -5,9 +5,10 @@ import lombok.Getter;
 @Getter
 public enum House {
 
-	RED_HOUSE("red-house.jpeg"),
-	GREEN_HOUSE("green-house.jpeg"),
-	BLUE_HOUSE("blue-house.jpeg");
+	RED_HOUSE("settlement_red.png"),
+	GREEN_HOUSE("settlement_green.png"),
+	BLUE_HOUSE("settlement_blue.png"),
+	YELLOW_HOUSE("settlement_yellow.png");
 
 	private final String house;
 

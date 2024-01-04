@@ -61,7 +61,7 @@ public class DiceBox {
 
         dice1.setImage(new Image("dice" + diceValue1 + ".png"));
         dice2.setImage(new Image("dice" + diceValue2 + ".png"));
-
+        
         // TEST
         startPollingInANewThread();
         // TEST
@@ -86,7 +86,7 @@ public class DiceBox {
             // This will be executed on the JavaFX Application Thread
             InitialResponseDTO response = pollingTask.getValue();
             // Update your UI based on the response
-            this.diceBox.setStyle("-fx-background-color: #000000;"); // TODO: Do not forget to delete
+            this.diceBox.setStyle("-fx-background-color: #97DEFB;"); // TODO: Do not forget to delete
             System.out.println("YEPPPPP!");
         });
 

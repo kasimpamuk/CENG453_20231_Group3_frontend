@@ -3,8 +3,10 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.comp
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.JavaFX;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +30,20 @@ public class BottomConsole {
 			stage.setTitle("Main Menu");
 
 		});
-		HBox bottomConsole = new HBox(20, resourceBox.getResource_box(), diceBox.getDiceBox(), menuButton);
+		ImageView waitGif = new ImageView("gif_timer.gif");
+		waitGif.setFitHeight(50);
+		waitGif.setFitWidth(50);
+		VBox vbox = new VBox();
+		vbox.setAlignment(Pos.CENTER);
+		int wait = 1;
+		if(wait == 1){
+			vbox.getChildren().addAll(waitGif);
+		}
+		if(wait == 0){
+			vbox.getChildren().removeAll(waitGif);
+		}
+		vbox.getChildren().addAll(menuButton);
+		HBox bottomConsole = new HBox(20, resourceBox.getResource_box(), diceBox.getDiceBox(), vbox);
 		bottomConsole.setAlignment(Pos.CENTER);
 		boardPane.setBottom(bottomConsole);
 	}

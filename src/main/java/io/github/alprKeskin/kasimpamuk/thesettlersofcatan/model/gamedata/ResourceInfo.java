@@ -8,5 +8,8 @@ import lombok.ToString;
 public class ResourceInfo {
 	private int brickAmount;
 	private int grainAmount;
+	private int lumberAmount;
+	private int oreAmount;
+	private int woolAmount;
 	// TODO: Add more
 }

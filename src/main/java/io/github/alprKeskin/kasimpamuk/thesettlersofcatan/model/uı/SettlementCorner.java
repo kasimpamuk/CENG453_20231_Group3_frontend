@@ -2,6 +2,7 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.House;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.GameBoard;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -39,6 +40,7 @@ public class SettlementCorner {
     }
 
     public void clickAction() {
+        //if(button) //if there is enough resource
         this.buildHouse();
         log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
         log.info("button disable: " + this.button.isDisabled());
