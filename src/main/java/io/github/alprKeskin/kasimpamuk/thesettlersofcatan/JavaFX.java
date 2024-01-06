@@ -1,17 +1,12 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.GameBoard;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.mainmanu.MenuWindow;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.JavaFxService;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu.MenuService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 public class JavaFX extends Application {
 

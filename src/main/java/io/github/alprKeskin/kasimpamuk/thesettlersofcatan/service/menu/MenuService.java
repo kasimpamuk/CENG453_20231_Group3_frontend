@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.mainmanu.components.LeaderBoardBox;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.LeaderBoardBox;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication.LoginService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication.RegisterService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.GameScreenService;
@@ -33,14 +33,16 @@ public class MenuService {
 
 	private final LoginService loginService;
 	private final RegisterService registerService;
+	private final LeaderBoardBox leaderBoardBox;
 
 	private final GameScreenService gameScreenService;
 
 	@Autowired
 	@Lazy
-	public MenuService(LoginService loginService, RegisterService registerService, GameScreenService gameScreenService) {
+	public MenuService(LoginService loginService, RegisterService registerService, LeaderBoardBox leaderBoardBox, GameScreenService gameScreenService) {
 		this.loginService = loginService;
 		this.registerService = registerService;
+		this.leaderBoardBox = leaderBoardBox;
 		this.gameScreenService = gameScreenService;
 		this.registerBox = this.registerService.createRegisterBox();
 		this.loginBox = this.loginService.createLoginBox();
@@ -87,7 +89,7 @@ public class MenuService {
 		centerPane.setGraphicTextGap(10);
 		centerPane.setContent(new Label("Welcome to Catan"));
 
-		Pane leaderPane = new LeaderBoardBox().getLeaderBoardBox();
+		Pane leaderPane = leaderBoardBox.createLeaderBoardBox();
 
 		vBox.getChildren().add(leaderPane);
 		vBox.setAlignment(Pos.CENTER);
