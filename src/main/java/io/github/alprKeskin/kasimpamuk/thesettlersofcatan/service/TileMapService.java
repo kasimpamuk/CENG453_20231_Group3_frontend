@@ -1,10 +1,10 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Edge;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.SettlementCorner;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Edge;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.SettlementCorner;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.CornerCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.EdgeCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.TileCreatorService;
@@ -43,7 +43,7 @@ public class TileMapService {
 
         this.tileCreatorService = new TileCreatorService(this.tileMapPane, this.tiles, this.terrains, this.tileNumbers, this.BOARD_CENTER);
         this.cornerCreatorService = new CornerCreatorService(this.tileMapPane, this.tiles);
-        this.edgeCreatorService = new EdgeCreatorService(this.tileMapPane, this.tiles);
+        this.edgeCreatorService = new EdgeCreatorService(this.tiles);
     }
 
     public void createTileMap() {
@@ -51,7 +51,7 @@ public class TileMapService {
         this.settlementCorners = this.cornerCreatorService.createAllSettlementCorners();
 //        this.cornerService = new CornerService(this.settlementCorners);
         // this.cornerService.disableAllSettlementCornerButtons();
-        this.edges = this.edgeCreatorService.createAllEdges();
+        this.edges = this.edgeCreatorService.createAllEdges(this.tileMapPane);
     }
 
 }

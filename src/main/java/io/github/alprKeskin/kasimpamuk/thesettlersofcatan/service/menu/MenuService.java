@@ -55,15 +55,13 @@ public class MenuService {
 		btPlay.setPrefWidth(100);
 		btPlay.setPrefHeight(50);
 		btPlay.setStyle("-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF; -fx-font-size: 20px;");
-		btPlay.setOnAction(e -> { // change scene
-			// GameBoard gameBoard = new GameBoard();
-//			gameBoard.display();
-			this.gameScreenService.resetBoard();
+		btPlay.setOnAction(e -> {
+			// change scene
 			this.gameScreenService.displayGameScreen();
 			Stage stage = (Stage) this.pane.getScene().getWindow();
 			stage.setTitle("Catan Board");
-//			stage.setScene(gameBoard.getCatanScene());
-			stage.setScene(this.gameScreenService.getCatanScene());
+			stage.setScene(gameScreenService.getCatanScene());
+			//stage.setScene(new Scene(this.gameScreenService.getBoardPane(), 750, 750));
 		});
 
 		VBox vBox = new VBox();

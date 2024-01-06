@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Resource;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Resource.*;
+import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource.*;
 
 @Service
 public class ResourceBoxService {

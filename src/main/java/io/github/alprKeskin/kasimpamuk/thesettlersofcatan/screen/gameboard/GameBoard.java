@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component.BottomConsole;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component.TileMap;
 import javafx.scene.Scene;

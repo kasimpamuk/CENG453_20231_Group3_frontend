@@ -1,12 +1,12 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrain.*;
+import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain.*;
 
 public class GameInitializationUtil {
 

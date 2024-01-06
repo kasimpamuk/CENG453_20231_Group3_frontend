@@ -1,8 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Point;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.SettlementCorner;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.Tile;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.SettlementCorner;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
 import javafx.scene.layout.Pane;
 import lombok.*;
 import org.springframework.stereotype.Service;
