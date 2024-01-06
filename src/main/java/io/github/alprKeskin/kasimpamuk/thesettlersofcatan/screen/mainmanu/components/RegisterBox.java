@@ -14,9 +14,6 @@ import lombok.Setter;
 @Setter
 public class RegisterBox {
 
-        private String username;
-        private String password;
-
         private TextField usernameField;
         private TextField passwordField;
 
@@ -48,8 +45,6 @@ public class RegisterBox {
             this.registerButton = new Button("Register");
             this.registerButton.setOnAction(e -> register());
             this.registerBox.getChildren().add(registerButton);
-
-
         }
 
         private void register() {

@@ -32,24 +32,11 @@ public class MenuWindow {
         this.loginBox = new LoginBox();
         this.registerBox = new RegisterBox();
         this.registerScene = new Scene(this.pane, 750, 750);
-
-
     }
 
     public void display() {
-
-        initializeWindowConfigurations();
-        setScene();
-
-    }
-
-    private void initializeWindowConfigurations() {
         this.pane.setPadding(new Insets(11, 12, 13, 14));
         this.pane.setStyle("-fx-background-color: #066098;");
-
-    }
-
-    private void setScene() {
         this.pane.setLeft(registerBox.getRegisterBox());
         this.pane.setRight(loginBox.getLoginBox());
         Button btPlay = new Button("Play");
@@ -67,7 +54,7 @@ public class MenuWindow {
         VBox vBox = new VBox();
         TitledPane centerPane = new TitledPane();
 
-        //add catan logo
+        // add catan logo
         ImageView catanLogo = new ImageView("catan_logo.png");
         catanLogo.setFitHeight(200);
         catanLogo.setFitWidth(200);

@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.JavaFX;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.DiceBoxService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu.MenuService;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -10,14 +11,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 @Getter
 @Setter
+@Service
 public class BottomConsole {
 
+	@Autowired
+	private MenuService menuService;
+
 	private ResourceBox resourceBox = new ResourceBox();
-	private DiceBox diceBox = new DiceBox();
+	private DiceBoxService diceBoxService = new DiceBoxService();
 	private Button menuButton = new Button("Menu");
 
 	public void initializeBottomConsole(BorderPane boardPane) {
@@ -26,7 +33,7 @@ public class BottomConsole {
 		menuButton.setOnAction(e -> {
 			// change scene
 			Stage stage = (Stage) this.menuButton.getScene().getWindow();
-			stage.setScene(JavaFX.registerWindow.getRegisterScene());
+			stage.setScene(this.menuService.getMenuScene());
 			stage.setTitle("Main Menu");
 
 		});
@@ -43,7 +50,7 @@ public class BottomConsole {
 			vbox.getChildren().removeAll(waitGif);
 		}
 		vbox.getChildren().addAll(menuButton);
-		HBox bottomConsole = new HBox(20, resourceBox.getResource_box(), diceBox.getDiceBox(), vbox);
+		HBox bottomConsole = new HBox(20, resourceBox.getResource_box(), diceBoxService.getDiceBox(), vbox);
 		bottomConsole.setAlignment(Pos.CENTER);
 		boardPane.setBottom(bottomConsole);
 	}

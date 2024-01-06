@@ -14,33 +14,21 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GameBoard {
 
-    // constants
     private final int WIDTH = 750;
     private final int HEIGHT = 750;
-    private Point BOARD_CENTER = new Point((double) WIDTH / 2, (double) HEIGHT / 2);
-
+    private final Point BOARD_CENTER = new Point((double) WIDTH / 2, (double) HEIGHT / 2);
     private final BorderPane boardPane = new BorderPane();
-    private Scene catanScene;
+    private final Scene catanScene = new Scene(this.boardPane, WIDTH, HEIGHT);
 
     private TileMap tileMap = new TileMap(WIDTH, HEIGHT, BOARD_CENTER);
     private BottomConsole bottomConsole = new BottomConsole();
 
     public void display() {
-        initializeBoardPane();
-        initializeCatanScene();
+        this.boardPane.setStyle("-fx-background-color: #87CEEB;");
+        this.boardPane.setCenter(this.tileMap.getTileMap());
 
         this.bottomConsole.initializeBottomConsole(this.boardPane);
         this.tileMap.initializeTileMap();
     }
-
-    private void initializeBoardPane() {
-        this.boardPane.setStyle("-fx-background-color: #87CEEB;");
-        this.boardPane.setCenter(this.tileMap.getTileMap());
-    }
-
-    private void initializeCatanScene() {
-        this.catanScene = new Scene(this.boardPane, WIDTH, HEIGHT);
-    }
-
 
 }

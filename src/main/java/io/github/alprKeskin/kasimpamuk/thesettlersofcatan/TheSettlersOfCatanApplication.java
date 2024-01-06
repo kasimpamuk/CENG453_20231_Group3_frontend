@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TheSettlersOfCatanApplication {
 
 	public static void main(String[] args) {
-		new Thread(() -> Application.launch(JavaFX.class, args)).start();
-		SpringApplication.run(TheSettlersOfCatanApplication.class, args);
+		Application.launch(JavaFX.class, args);
 	}
 
 }

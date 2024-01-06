@@ -8,6 +8,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.uı.enums.Terrai
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.CornerCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.EdgeCreatorService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.TileCreatorService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.CornerService;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +49,7 @@ public class TileMapService {
     public void createTileMap() {
         this.tiles = this.tileCreatorService.createAllTiles();
         this.settlementCorners = this.cornerCreatorService.createAllSettlementCorners();
-        this.cornerService = new CornerService(this.settlementCorners);
+//        this.cornerService = new CornerService(this.settlementCorners);
         // this.cornerService.disableAllSettlementCornerButtons();
         this.edges = this.edgeCreatorService.createAllEdges();
     }

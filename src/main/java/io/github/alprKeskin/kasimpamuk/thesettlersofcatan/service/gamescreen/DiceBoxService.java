@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.screen.gameboard.component;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.restservice.CatanRestService;
@@ -11,18 +11,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Random;
 
 @Getter
 @Setter
 @Service
-public class DiceBox {
+public class DiceBoxService {
 
     private ImageView dice1, dice2;
     private HBox diceBox;
@@ -30,7 +27,7 @@ public class DiceBox {
 
     private CatanRestService catanRestService = new CatanRestService();
 
-    public DiceBox() {
+    public DiceBoxService() {
         createDiceBox();
         createRollDiceButton();
     }
