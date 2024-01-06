@@ -75,7 +75,7 @@ public class DiceBoxService {
         Task<InitialResponseDTO> pollingTask = new Task<>() {
             @Override
             protected InitialResponseDTO call() throws Exception {
-                return catanRestService.sendGetRequestByPolling(new URI("http://localhost:8080/api/catan/test-get"));
+                return catanRestService.getInitialGameData();
             }
         };
 
@@ -84,7 +84,6 @@ public class DiceBoxService {
             InitialResponseDTO response = pollingTask.getValue();
             // Update your UI based on the response
             this.diceBox.setStyle("-fx-background-color: #97DEFB;"); // TODO: Do not forget to delete
-            System.out.println("YEPPPPP!");
         });
 
         pollingTask.setOnFailed(event -> {
