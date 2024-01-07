@@ -12,13 +12,13 @@ public enum Resource {
     ORE,
     WOOL;
 
-    public Color getColor() {
+    public String getColor() {
         return switch (this) {
-            case BRICK -> Color.web("#b7410e");
-            case ORE -> Color.web("#708090");
-            case LUMBER -> Color.web("#228b22");
-            case GRAIN -> Color.web("#ffc300");
-            case WOOL -> Color.web("#b6c9a2");
+            case BRICK -> "#b7410e";
+            case ORE -> "#708090";
+            case LUMBER -> "#228b22";
+            case GRAIN -> "#ffc300";
+            case WOOL -> "#b6c9a2";
         };
     }
 

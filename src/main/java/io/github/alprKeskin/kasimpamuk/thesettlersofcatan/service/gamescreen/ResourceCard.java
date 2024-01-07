@@ -29,11 +29,10 @@ public class ResourceCard {
 		this.countLabel = new Label(Integer.toString(initialCount));
 	}
 
-	public void createResourceCard() {
-		Color backgroundColor = this.resource.getColor();
-		this.resourceCard.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
-		this.resourceImage.setFitHeight(SIZE);
-		this.resourceImage.setFitWidth(SIZE);
+	public void createResourceCard(){
+		String backgroundColor = this.resource.getColor();
+		System.out.println("background color: " + backgroundColor + " for resource: " + this.resource);
+
 
 		countLabel.setFont(new Font("Arial", 20)); // Increase the font size
 		countLabel.setTextFill(Color.WHITE); // Set a text color that contrasts with the background
@@ -41,9 +40,12 @@ public class ResourceCard {
 		countLabel.setAlignment(Pos.CENTER); // Center align the text
 
 		this.resourceCard = new VBox(5, this.resourceImage, this.countLabel);
+		this.resourceImage.setFitHeight(SIZE);
+		this.resourceImage.setFitWidth(SIZE);
 		this.resourceCard.setAlignment(Pos.CENTER);
 		this.resourceCard.setPadding(new Insets(10));
 		this.resourceCard.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-color: black; -fx-border-width: 2;");
+
 	}
 
 	public void increaseCount(int amount) {
