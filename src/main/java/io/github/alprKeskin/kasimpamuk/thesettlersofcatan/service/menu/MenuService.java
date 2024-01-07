@@ -33,6 +33,8 @@ public class MenuService {
 	private final LeaderBoardBox leaderBoardBox;
 
 	private final GameScreenService gameScreenService;
+	@Getter
+	private Button btPlay = new Button("Play");
 
 	@Autowired
 	@Lazy
@@ -50,7 +52,6 @@ public class MenuService {
 		this.pane.setStyle("-fx-background-color: #066098;");
 		this.pane.setLeft(this.registerBox);
 		this.pane.setRight(this.loginBox);
-		Button btPlay = new Button("Play");
 		btPlay.setPrefWidth(100);
 		btPlay.setPrefHeight(50);
 		btPlay.setStyle("-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF; -fx-font-size: 20px;");
@@ -61,6 +62,7 @@ public class MenuService {
 			stage.setTitle("Catan Board");
 			stage.setScene(gameScreenService.getCatanScene());
 		});
+		btPlay.setDisable(true);
 
 		VBox vBox = new VBox();
 		TitledPane centerPane = new TitledPane();

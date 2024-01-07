@@ -146,7 +146,6 @@ public class GameScreenService {
 						int roadId = newRoadIds.get(i);
 						edges.get(roadId).buildRoad(color);
 					}
-					System.out.println("HOOOOPPP");
 					ClientInfo.idOfTheLastConsumedPlayerActionInfo = receivedPlayerActionInfo.getPlayerId();
 				}
 			}
