@@ -34,6 +34,7 @@ public class GameScreenService {
 	@Getter
 	private final Scene catanScene = new Scene(boardPane, WIDTH, HEIGHT);
 	private Button endTurnButton;
+	private static boolean gameFlag = false;
 
 	private final TileMapService tileMapService;
 	private final BottomConsoleService bottomConsoleService;
@@ -54,20 +55,24 @@ public class GameScreenService {
 	}
 
 	public void displayGameScreen() {
-		this.setClientInitialGameData();
+		if(!gameFlag) {
+			this.setClientInitialGameData();
 
-		//this.tileMapService.resetTileMap();
-		this.boardPane.setStyle("-fx-background-color: #87CEEB;");
-		this.boardPane.setCenter(this.tileMapService.getTileMap());
 
-		this.boardPane.setBottom(this.bottomConsoleService.createBottomConsole());
-		this.tileMapService.initializeTileMap(BOARD_CENTER);
-		this.disableAllButtons();
+			//this.tileMapService.resetTileMap();
+			this.boardPane.setStyle("-fx-background-color: #87CEEB;");
+			this.boardPane.setCenter(this.tileMapService.getTileMap());
 
-		ResponseDTO responseDTO = this.getGameData();
+			this.boardPane.setBottom(this.bottomConsoleService.createBottomConsole());
+			this.tileMapService.initializeTileMap(BOARD_CENTER);
+			this.disableAllButtons();
+
+			ResponseDTO responseDTO = this.getGameData();
+		}
 	}
 
 	private void setClientInitialGameData() {
+		gameFlag = true;
 		InitialResponseDTO initialResponseDTO = this.catanRestService.getInitialGameData();
 		ClientInfo.gameId = initialResponseDTO.getGameId();
 		ClientInfo.playerId = initialResponseDTO.getPlayerId();
@@ -109,6 +114,7 @@ public class GameScreenService {
 				this.bottomConsoleService.disappearWaitingIcon(bottomConsoleService.getVbox());
 				endTurnButton = new Button("End Turn");
 				endTurnButton.setOnAction(e -> {
+					diceBoxService.resetDiceView();
 					PlayerActionInfo playerActionInfo = new PlayerActionInfo(ClientInfo.playerId, ClientInfo.playerColor, diceBoxService.getDiceValue1(), diceBoxService.getDiceValue2(), ClientInfo.newSettlementIdsInRound, ClientInfo.newRoadIdsInRound);
 					ClientInfo.newSettlementIdsInRound = new ArrayList<>();
 					ClientInfo.newRoadIdsInRound = new ArrayList<>();

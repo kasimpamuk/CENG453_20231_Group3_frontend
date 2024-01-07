@@ -63,8 +63,11 @@ public class DiceBoxService {
 
         this.button.setDisable(true);
         tileMapService.enableAllButtons();
+    }
 
-
+    public void resetDiceView() {
+        this.dice1.setImage(new Image("dice1.png"));
+        this.dice2.setImage(new Image("dice1.png"));
     }
 
     private ImageView generateDice(String iconName, Integer height, Integer width) {
