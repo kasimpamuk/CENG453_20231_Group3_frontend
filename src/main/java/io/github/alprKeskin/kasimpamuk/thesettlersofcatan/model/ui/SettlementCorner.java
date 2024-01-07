@@ -1,17 +1,25 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.ResourceBoxService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -39,7 +47,7 @@ public class SettlementCorner {
     }
 
     public void clickAction() {
-        //if(button) //if there is enough resource
+        if (!doWeHaveEnoughResourcesToBuildHouse()) return;
         this.buildHouse();
         ClientInfo.newSettlementIdsInRound.add(this.id);
         log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
@@ -54,6 +62,7 @@ public class SettlementCorner {
         button.setDisable(false);
     }
 
+    // For this player's house
     public void buildHouse() {
         this.color = ClientInfo.playerColor;
         Image houseImage = new Image(this.color.getHouse());
@@ -68,8 +77,26 @@ public class SettlementCorner {
         houseView.setY(this.location.getY() - HOUSE_IMAGE_SIZE / 2);
 
         this.pane.getChildren().add(houseView);
+
+        // reduce resources
+        consumeHouseResources();
     }
 
+    private boolean doWeHaveEnoughResourcesToBuildHouse() {
+        return (ClientInfo.myResourceInfo.getLumberAmount() > 0) &&
+                (ClientInfo.myResourceInfo.getBrickAmount() > 0) &&
+                (ClientInfo.myResourceInfo.getWoolAmount() > 0) &&
+                (ClientInfo.myResourceInfo.getGrainAmount() > 0);
+    }
+
+    private void consumeHouseResources() {
+        ClientInfo.myResourceInfo.setLumberAmount(ClientInfo.myResourceInfo.getLumberAmount() - 1);
+        ClientInfo.myResourceInfo.setBrickAmount(ClientInfo.myResourceInfo.getBrickAmount() - 1);
+        ClientInfo.myResourceInfo.setWoolAmount(ClientInfo.myResourceInfo.getWoolAmount() - 1);
+        ClientInfo.myResourceInfo.setGrainAmount(ClientInfo.myResourceInfo.getGrainAmount() - 1);
+    }
+
+    // For other players houses
     public void buildHouse(Color color) {
         Image houseImage = new Image(color.getHouse());
         ImageView houseView = new ImageView(houseImage);

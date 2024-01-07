@@ -61,6 +61,7 @@ public class ResourceBoxService {
 
 		return box;
 	}
+
 	public void adjustResourceCount(Map<Resource, Label> resourceLabelMap, Resource resource, int change) {
 		Label label = resourceLabelMap.get(resource);
 		if (label != null) {
@@ -69,5 +70,7 @@ public class ResourceBoxService {
 			label.setText(Integer.toString(newCount));
 		}
 	}
+
+
 
 }

@@ -50,16 +50,29 @@ public class Edge {
     }
 
     private void clickAction() {
+        if (!doWeHaveEnoughResourcesToBuildRoad()) return;
         this.buildRoad();
         ClientInfo.newRoadIdsInRound.add(this.id);
         log.info("Road button clicked!");
     }
 
+    // For my roads
     public void buildRoad() {
         this.pane.getChildren().add(setRoad(ClientInfo.playerColor.getColor()));
         pane.getChildren().remove(this.button);
+        this.consumerRoadResources();
     }
 
+    private boolean doWeHaveEnoughResourcesToBuildRoad() {
+        return (ClientInfo.myResourceInfo.getBrickAmount() > 0) && (ClientInfo.myResourceInfo.getLumberAmount() > 0);
+    }
+
+    private void consumerRoadResources() {
+        ClientInfo.myResourceInfo.setBrickAmount(ClientInfo.myResourceInfo.getBrickAmount() - 1);
+        ClientInfo.myResourceInfo.setLumberAmount(ClientInfo.myResourceInfo.getLumberAmount() - 1);
+    }
+
+    // For other players roads
     public void buildRoad(io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color color) {
         this.pane.getChildren().add(setRoad(color.getColor()));
         pane.getChildren().remove(this.button);
