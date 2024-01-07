@@ -1,8 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.GameInitializationUtil;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain.DESERT;
 
 @Service
 @Getter
@@ -48,7 +46,7 @@ public class TileMapInitializationService {
 	private List<Tile> createTilesRow(int numberOfTiles, int startId, Point startPoint) {
 		List<Tile> tilesInRow = new ArrayList<>();
 
-		List<Terrain> terrains = GameInitializationUtil.createTerrainList();
+		List<TerrainType> terrains = GameInitializationUtil.createTerrainList();
 		List<Integer> tileNumbers = GameInitializationUtil.createNumberList();
 
 		for (int i = 0; i < numberOfTiles; i++) {
@@ -56,7 +54,7 @@ public class TileMapInitializationService {
 			double distanceFromCenterToEdge = TILE_EDGE_SIZE * Math.sqrt(3) / 2;
 			Point center = new Point(startPoint.getX() + i * distanceFromCenterToEdge * 2, startPoint.getY());
 			if (id == 9) {
-				Tile tile = createTile(id, DESERT, 0, center);
+				Tile tile = createTile(id, TerrainType.DESERT, 0, center);
 				tilesInRow.add(tile);
 			}
 			else {
@@ -73,8 +71,8 @@ public class TileMapInitializationService {
 		return tilesInRow;
 	}
 
-	private Tile createTile(int id, Terrain terrain, int number, Point center) {
-		Tile tile =  new Tile(id, center, terrain, number, TILE_EDGE_SIZE);
+	private Tile createTile(int id, TerrainType terrainType, int number, Point center) {
+		Tile tile =  new Tile(id, center, terrainType, number, TILE_EDGE_SIZE);
 		this.tiles.add(tile);
 		this.tileMap.getChildren().add(tile.getHexagon());
 		if (id != 9) {

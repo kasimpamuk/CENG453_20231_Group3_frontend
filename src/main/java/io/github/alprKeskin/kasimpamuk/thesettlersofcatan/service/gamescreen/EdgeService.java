@@ -5,6 +5,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.SettlementCorner;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
 import javafx.scene.layout.Pane;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,23 @@ import java.util.List;
 
 @Service
 @Slf4j
+@Getter
 public class EdgeService {
 
     private final int[][] edgeCornerMatrix = new int[72][54]; // 72 edges, 54 corners
     private final List<Edge> edges = new ArrayList<>();
+
+    public void disableAllEdgeButtons() {
+        for (Edge edge : this.edges) {
+            edge.disableButton();
+        }
+    }
+
+    public void enableAllEdgeButtons() {
+        for (Edge edge : this.edges) {
+            edge.enableButton();
+        }
+    }
 
     public void createAllEdges(Pane tileMapPane, List<Tile> tiles, List<SettlementCorner> settlementCorners) {
         List<Integer> tileIdsCreatingAllRoads = new ArrayList<>(Arrays.asList(0, 2, 7, 9, 11, 16, 18));

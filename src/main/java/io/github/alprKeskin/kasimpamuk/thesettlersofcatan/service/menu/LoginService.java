@@ -1,5 +1,7 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.restservice.CatanRestService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,6 +16,11 @@ public class LoginService {
 	private final Button loginButton = new Button("Login");
 	private final TextField usernameField  = new TextField();
 	private final TextField passwordField  = new TextField();
+	private final CatanRestService catanRestService;
+
+	public LoginService(CatanRestService catanRestService) {
+		this.catanRestService = catanRestService;
+	}
 
 	public VBox createLoginBox() {
 		VBox loginBox = new VBox(10);
@@ -37,6 +44,14 @@ public class LoginService {
 	private void login() {
 		// TODO: code...
 		System.out.println("Login button clicked!");
+		String token = this.catanRestService.login(this.usernameField.getText(), this.passwordField.getText());
+		if (token != null) {
+			ClientInfo.token = token;
+			System.out.println("Login successful!");
+		} else {
+			ClientInfo.token = "";
+			System.out.println("Login failed!");
+		}
 		return;
 	}
 

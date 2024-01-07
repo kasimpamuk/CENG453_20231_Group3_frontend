@@ -1,5 +1,6 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.restservice.CatanRestService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,6 +15,11 @@ public class RegisterService {
 	private final Button registerButton = new Button("Register");
 	private final TextField usernameField  = new TextField();
 	private final TextField passwordField  = new TextField();
+	private final CatanRestService catanRestService;
+
+	public RegisterService(CatanRestService catanRestService) {
+		this.catanRestService = catanRestService;
+	}
 
 	public VBox createRegisterBox() {
 		VBox registerBox = new VBox(10);
@@ -36,6 +42,9 @@ public class RegisterService {
 	private void register() {
 		// TODO: code...
 		System.out.println("Register button clicked!");
+		System.out.println("Username: " + this.usernameField.getText());
+		System.out.println("Password: " + this.passwordField.getText());
+		this.catanRestService.register(this.usernameField.getText(), this.passwordField.getText());
 		return;
 	}
 

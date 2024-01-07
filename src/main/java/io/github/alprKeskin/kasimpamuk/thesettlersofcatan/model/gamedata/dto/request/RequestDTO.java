@@ -1,11 +1,11 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.RequestType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +13,8 @@ import java.util.List;
 @ToString
 public class RequestDTO {
 
-	private int playerId;
-	private int dice1;
-	private int dice2;
-	private List<Integer> newSettlementIds;
-	private List<Integer> newRoadIds;
+	private RequestType requestType;
+	private int gameId;
+	private PlayerActionInfo playerActionInfo;
 
 }

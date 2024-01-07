@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -49,10 +50,27 @@ public class Edge {
     }
 
     private void clickAction() {
-        this.pane.getChildren().add(setRoad(Color.RED));
-        pane.getChildren().remove(this.button);
-        this.button = null;
+        this.buildRoad();
+        ClientInfo.newRoadIdsInRound.add(this.id);
         log.info("Road button clicked!");
+    }
+
+    public void buildRoad() {
+        this.pane.getChildren().add(setRoad(ClientInfo.playerColor.getColor()));
+        pane.getChildren().remove(this.button);
+    }
+
+    public void buildRoad(io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color color) {
+        this.pane.getChildren().add(setRoad(color.getColor()));
+        pane.getChildren().remove(this.button);
+    }
+
+    public void disableButton() {
+        button.setDisable(true);
+    }
+
+    public void enableButton() {
+        button.setDisable(false);
     }
 
     private Button createRoadButton(EventHandler<ActionEvent> actionOnClick) {

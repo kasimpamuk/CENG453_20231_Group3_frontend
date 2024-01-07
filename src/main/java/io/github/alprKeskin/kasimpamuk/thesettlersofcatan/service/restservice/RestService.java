@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request.RequestDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -20,9 +21,9 @@ import java.net.URI;
 public class RestService {
 
     private final Gson gson = new Gson();
-    private final String JWT_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbHBlckBvdXRsb29rLmNvbSIsImV4cCI6MTkyMDI5NTkyMH0.0YKrSBvGyyaWFg1DU_wXS6f3ChNlJrCPM52DOI2fCdM";
 
     public InitialResponseDTO sendGetRequest(CloseableHttpClient client, URI uri) {
+        String JWT_TOKEN = ClientInfo.token;
         HttpGet request = new HttpGet(uri);
         request.addHeader("Authorization", "Bearer " + JWT_TOKEN);
 
@@ -32,8 +33,9 @@ public class RestService {
     }
 
     public ResponseDTO sendPostRequest(CloseableHttpClient client, URI uri, RequestDTO entity) {
+        String JWT_TOKEN = ClientInfo.token;
         HttpPost request = new HttpPost(uri);
-        request.addHeader("Authorization", "Bearer" + JWT_TOKEN);
+        request.addHeader("Authorization", "Bearer " + JWT_TOKEN);
 
         String jsonResponse = executePostRequest(client, request, gson.toJson(entity));
 
@@ -44,6 +46,7 @@ public class RestService {
         String response = null;
         try {
             response = client.execute(request, httpResponse -> EntityUtils.toString(httpResponse.getEntity()));
+            System.out.println("Heyyyy: " + response);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,15 +56,17 @@ public class RestService {
     }
 
     private String executePostRequest(CloseableHttpClient client, HttpPost request, String jsonRequestBody) {
+        System.out.println("Request: " + jsonRequestBody);
         String response = null;
         try {
-            request.setEntity(new StringEntity(jsonRequestBody));
             request.setHeader("Accept", "application/json");
             request.setHeader("Content-type", "application/json");
+            request.setEntity(new StringEntity(jsonRequestBody));
             response = client.execute(request, httpResponse -> EntityUtils.toString(httpResponse.getEntity()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Response: " + response);
         if (response == null) throw new RuntimeException("Post response is null!");
         return response;
     }

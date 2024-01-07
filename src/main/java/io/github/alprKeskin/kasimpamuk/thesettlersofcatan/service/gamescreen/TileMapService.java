@@ -1,9 +1,8 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Edge;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Point;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.SettlementCorner;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.creator.EdgeCreatorService;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class TileMapService {
 
 
 	@Autowired
-	public TileMapService(TileMapInitializationService tileMapInitializationService, CornerService cornerService, EdgeCreatorService edgeCreatorService, EdgeService edgeService) {
+	public TileMapService(TileMapInitializationService tileMapInitializationService, CornerService cornerService, EdgeService edgeService) {
 		this.tileMapInitializationService = tileMapInitializationService;
 		this.cornerService = cornerService;
 		this.edgeService = edgeService;
@@ -44,4 +43,19 @@ public class TileMapService {
 		this.cornerService.getSettlementCorners().clear();
 	}
 
+	public void enableAllSettlementCornerButtons() {
+		this.cornerService.enableAllSettlementCornerButtons();
+	}
+
+	public void disableAllSettlementCornerButtons() {
+		this.cornerService.disableAllSettlementCornerButtons();
+	}
+
+	public void enableAllRoadEdgeButtons() {
+		this.edgeService.enableAllEdgeButtons();
+	}
+
+	public void disableAllRoadEdgeButtons() {
+		this.edgeService.disableAllEdgeButtons();
+	}
 }

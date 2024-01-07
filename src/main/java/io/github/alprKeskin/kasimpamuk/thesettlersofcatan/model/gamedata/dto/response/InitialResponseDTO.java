@@ -2,7 +2,6 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.re
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.TileInfo;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.List;
 @ToString
 public class InitialResponseDTO {
 
-	private ResponseType responseType;
+	private int gameId;
 	private int playerId;
 	private Color playerColor;
 	private List<TileInfo> tileInfos;

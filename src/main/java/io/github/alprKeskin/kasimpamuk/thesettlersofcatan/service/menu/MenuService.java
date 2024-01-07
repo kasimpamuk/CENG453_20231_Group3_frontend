@@ -1,8 +1,5 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.LeaderBoardBox;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication.LoginService;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication.RegisterService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.GameScreenService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,7 +60,6 @@ public class MenuService {
 			Stage stage = (Stage) this.pane.getScene().getWindow();
 			stage.setTitle("Catan Board");
 			stage.setScene(gameScreenService.getCatanScene());
-			//stage.setScene(new Scene(this.gameScreenService.getBoardPane(), 750, 750));
 		});
 
 		VBox vBox = new VBox();

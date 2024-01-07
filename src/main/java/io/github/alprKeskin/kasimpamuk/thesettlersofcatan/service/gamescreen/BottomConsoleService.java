@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class BottomConsoleService {
 
 	private final ImageView waitGif = createWaitGif();
-
+	private VBox vbox;
 	private final MenuService menuService;
 	private final ResourceBoxService resourceBoxService;
 	private final DiceBoxService diceBoxService;
@@ -41,12 +41,12 @@ public class BottomConsoleService {
 
 		});
 
-		VBox vbox = new VBox();
+		vbox = new VBox();
 		vbox.setAlignment(Pos.CENTER);
+		vbox.getChildren().addAll(menuButton);
 
 		showWaitingIcon(vbox);
 
-		vbox.getChildren().addAll(menuButton);
 		HBox bottomConsole = new HBox(20, this.resourceBoxService.createHorizontalResourceBox(), diceBoxService.getDiceBox(), vbox);
 		bottomConsole.setAlignment(Pos.CENTER);
 

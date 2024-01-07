@@ -20,14 +20,14 @@ public class CornerService {
 	// 19 tiles, 54 corners
 	private final int[][] cornerTileMatrix = new int[19][54];
 
-	public void disableAllSettlementCornerButtons(List<SettlementCorner> settlementCorners) {
-		for (SettlementCorner settlementCorner : settlementCorners) {
+	public void disableAllSettlementCornerButtons() {
+		for (SettlementCorner settlementCorner : this.settlementCorners) {
 			settlementCorner.disableButton();
 		}
 	}
 
-	public void enableAllSettlementCornerButtons(List<SettlementCorner> settlementCorners) {
-		for (SettlementCorner settlementCorner : settlementCorners) {
+	public void enableAllSettlementCornerButtons() {
+		for (SettlementCorner settlementCorner : this.settlementCorners) {
 			settlementCorner.enableButton();
 		}
 	}

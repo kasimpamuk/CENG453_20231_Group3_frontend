@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
 import javafx.scene.layout.GridPane;
 import lombok.Getter;

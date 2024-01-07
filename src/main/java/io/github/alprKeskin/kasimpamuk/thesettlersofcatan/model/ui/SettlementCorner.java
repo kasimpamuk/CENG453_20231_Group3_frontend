@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.House;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,7 +23,7 @@ public class SettlementCorner {
     public static int cornerId = 0;
     private int id;
     private Point location;
-    private House house;
+    private Color color;
     private List<Integer> adjacentTileIds;
 
     private final Pane pane;
@@ -40,6 +41,7 @@ public class SettlementCorner {
     public void clickAction() {
         //if(button) //if there is enough resource
         this.buildHouse();
+        ClientInfo.newSettlementIdsInRound.add(this.id);
         log.info("Adjacent tiles for the settlement: " + this.adjacentTileIds);
         log.info("button disable: " + this.button.isDisabled());
     }
@@ -52,9 +54,24 @@ public class SettlementCorner {
         button.setDisable(false);
     }
 
-    private void buildHouse() {
-        this.house = House.RED_HOUSE;
-        Image houseImage = new Image(house.getHouse());
+    public void buildHouse() {
+        this.color = ClientInfo.playerColor;
+        Image houseImage = new Image(this.color.getHouse());
+        ImageView houseView = new ImageView(houseImage);
+
+        // Assuming the image is a square, adjust size as needed
+        houseView.setFitHeight(HOUSE_IMAGE_SIZE);
+        houseView.setFitWidth(HOUSE_IMAGE_SIZE);
+
+        // Position the image at the corner, adjusting such that it's centered on the point
+        houseView.setX(this.location.getX() - HOUSE_IMAGE_SIZE / 2);
+        houseView.setY(this.location.getY() - HOUSE_IMAGE_SIZE / 2);
+
+        this.pane.getChildren().add(houseView);
+    }
+
+    public void buildHouse(Color color) {
+        Image houseImage = new Image(color.getHouse());
         ImageView houseView = new ImageView(houseImage);
 
         // Assuming the image is a square, adjust size as needed

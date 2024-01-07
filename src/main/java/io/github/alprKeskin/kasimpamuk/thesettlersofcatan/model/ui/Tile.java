@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Terrain;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -16,18 +16,18 @@ public class Tile {
     private final int id;
     private final Point center;
     private final int edgeSize;
-    private final Terrain terrain;
+    private final TerrainType terrainType;
     private final int number;
     private List<Point> corners;
     static int cornerId = 0;
     static int edgeId = 0;
     private Polygon hexagon;
 
-    public Tile(int id, Point center, Terrain terrain, int number, int edgeSize) {
+    public Tile(int id, Point center, TerrainType terrainType, int number, int edgeSize) {
         this.id = id;
         this.center = center;
         this.edgeSize = edgeSize;
-        this.terrain = terrain;
+        this.terrainType = terrainType;
         this.number = number;
 
         corners = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Tile {
         hexagon.getPoints().addAll(hexPoints);
         hexagon.setStrokeWidth(2);
         hexagon.setStroke(Color.BLACK);
-        hexagon.setFill(terrain.getColor());
+        hexagon.setFill(terrainType.getColor());
     }
 
     public Point getTopCornerPoint() {
