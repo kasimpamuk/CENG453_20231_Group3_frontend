@@ -7,6 +7,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.GameInitializatio
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,12 @@ public class TileMapInitializationService {
 	private final int TILE_EDGE_SIZE = 50;
 	private final List<Tile> tiles = new ArrayList<>();
 	private final Pane tileMap = new Pane();
+	private final ResourceBoxService resourceBoxService;
+
+	@Autowired
+	public TileMapInitializationService(ResourceBoxService resourceBoxService) {
+		this.resourceBoxService = resourceBoxService;
+	}
 
 	public List<Tile> createAllTiles(Point boardCenter) {
 		List<Tile> allTiles = new ArrayList<>();
@@ -72,7 +79,7 @@ public class TileMapInitializationService {
 	}
 
 	private Tile createTile(int id, TerrainType terrainType, int number, Point center) {
-		Tile tile =  new Tile(id, center, terrainType, number, TILE_EDGE_SIZE);
+		Tile tile =  new Tile(id, center, terrainType, number, TILE_EDGE_SIZE, resourceBoxService);
 		this.tiles.add(tile);
 		this.tileMap.getChildren().add(tile.getHexagon());
 		if (id != 9) {

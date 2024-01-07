@@ -7,6 +7,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,12 @@ public class EdgeService {
 
     private final int[][] edgeCornerMatrix = new int[72][54]; // 72 edges, 54 corners
     private final List<Edge> edges = new ArrayList<>();
+    private final ResourceBoxService resourceBoxService;
+
+    @Autowired
+    public EdgeService(ResourceBoxService resourceBoxService) {
+        this.resourceBoxService = resourceBoxService;
+    }
 
     public void disableAllEdgeButtons() {
         for (Edge edge : this.edges) {
@@ -104,7 +111,7 @@ public class EdgeService {
     }
 
     private Edge createEdge(int id, Point point1, Point point2, Pane tileMapPane) {
-        Edge edge = new Edge(id, point1, point2, tileMapPane);
+        Edge edge = new Edge(id, point1, point2, tileMapPane, resourceBoxService);
         tileMapPane.getChildren().add(edge.getButton());
         return edge;
     }

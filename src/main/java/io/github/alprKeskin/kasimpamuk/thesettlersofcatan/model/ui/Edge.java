@@ -1,5 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.ResourceBoxService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,18 +33,13 @@ public class Edge {
     private final Pane pane;
     private Button button;
 
-    public Edge(int id, Point location1, Point location2, boolean isRoad, Pane pane) {
+    private final ResourceBoxService resourceBoxService;
+
+    public Edge(int id, Point location1, Point location2, Pane pane, ResourceBoxService resourceBoxService) {
         this.id = id;
         this.location1 = location1;
         this.location2 = location2;
-        this.isRoad = isRoad;
-        this.pane = pane;
-        this.button = createRoadButton((e) -> clickAction());
-    }
-    public Edge(int id, Point location1, Point location2, Pane pane) {
-        this.id = id;
-        this.location1 = location1;
-        this.location2 = location2;
+        this.resourceBoxService = resourceBoxService;
         this.isRoad = false;
         this.pane = pane;
         this.button = createRoadButton((e) -> clickAction());
@@ -70,6 +66,9 @@ public class Edge {
     private void consumerRoadResources() {
         ClientInfo.myResourceInfo.setBrickAmount(ClientInfo.myResourceInfo.getBrickAmount() - 1);
         ClientInfo.myResourceInfo.setLumberAmount(ClientInfo.myResourceInfo.getLumberAmount() - 1);
+
+        resourceBoxService.getBrickCard().decreaseCount(1);
+        resourceBoxService.getLumberCard().decreaseCount(1);
     }
 
     // For other players roads

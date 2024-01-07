@@ -1,25 +1,18 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.ResourceBoxService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -37,13 +30,15 @@ public class SettlementCorner {
     private final Pane pane;
     private Button button;
 
+    private final ResourceBoxService resourceBoxService;
 
-    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane) {
+    public SettlementCorner(int id, Point location, List<Integer> adjacentTileIds, Pane pane, ResourceBoxService resourceBoxService) {
         this.id = id;
         this.location = location;
         this.button = createCornerButton(location, (e) -> clickAction());
         this.adjacentTileIds = adjacentTileIds;
         this.pane = pane;
+        this.resourceBoxService = resourceBoxService;
     }
 
     public void clickAction() {
@@ -94,6 +89,11 @@ public class SettlementCorner {
         ClientInfo.myResourceInfo.setBrickAmount(ClientInfo.myResourceInfo.getBrickAmount() - 1);
         ClientInfo.myResourceInfo.setWoolAmount(ClientInfo.myResourceInfo.getWoolAmount() - 1);
         ClientInfo.myResourceInfo.setGrainAmount(ClientInfo.myResourceInfo.getGrainAmount() - 1);
+
+        resourceBoxService.getLumberCard().decreaseCount(1);
+        resourceBoxService.getBrickCard().decreaseCount(1);
+        resourceBoxService.getWoolCard().decreaseCount(1);
+        resourceBoxService.getGrainCard().decreaseCount(1);
     }
 
     // For other players houses

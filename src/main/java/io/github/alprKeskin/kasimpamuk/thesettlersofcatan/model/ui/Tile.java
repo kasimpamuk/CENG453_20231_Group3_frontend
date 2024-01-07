@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.ResourceBoxService;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -22,13 +23,15 @@ public class Tile {
     static int cornerId = 0;
     static int edgeId = 0;
     private Polygon hexagon;
+    private final ResourceBoxService resourceBoxService;
 
-    public Tile(int id, Point center, TerrainType terrainType, int number, int edgeSize) {
+    public Tile(int id, Point center, TerrainType terrainType, int number, int edgeSize, ResourceBoxService resourceBoxService) {
         this.id = id;
         this.center = center;
         this.edgeSize = edgeSize;
         this.terrainType = terrainType;
         this.number = number;
+        this.resourceBoxService = resourceBoxService;
 
         corners = new ArrayList<>();
 
@@ -85,7 +88,7 @@ public class Tile {
     }
 
     private Edge createEdge(int id, Point point1, Point point2, Pane pane) {
-        Edge edge = new Edge(id, point1, point2, pane);
+        Edge edge = new Edge(id, point1, point2, pane, resourceBoxService);
         pane.getChildren().add(edge.getButton());
         return edge;
     }

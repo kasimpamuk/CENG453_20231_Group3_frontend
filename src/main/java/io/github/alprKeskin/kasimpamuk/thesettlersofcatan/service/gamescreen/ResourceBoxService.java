@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumMap;
@@ -17,7 +18,14 @@ import java.util.Map;
 import static io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource.*;
 
 @Service
+@Getter
 public class ResourceBoxService {
+
+	private ResourceCard brickCard;
+	private ResourceCard grainCard;
+	private ResourceCard lumberCard;
+	private ResourceCard oreCard;
+	private ResourceCard woolCard;
 
 	public HBox createHorizontalResourceBox() {
 		return this.initializeResourceBox();
@@ -29,11 +37,11 @@ public class ResourceBoxService {
 		resourceBox.setPadding(new Insets(10));
 		resourceBox.setStyle("-fx-background-color: #FFFD74;");
 
-		ResourceCard brickCard = createResourceCard("brick.png", BRICK, 3); // Brownish color for brick
-		ResourceCard grainCard = createResourceCard("grain.png", GRAIN, 1); // Gold color for grain
-		ResourceCard lumberCard = createResourceCard("lumber.png", LUMBER, 3); // Green color for lumber
-		ResourceCard oreCard = createResourceCard("ore.png", ORE, 0); // Gray color for ore
-		ResourceCard woolCard = createResourceCard("wool.png", WOOL, 1); // Beige color for wool
+		this.brickCard = createResourceCard("brick.png", BRICK, 3); // Brownish color for brick
+		this.grainCard = createResourceCard("grain.png", GRAIN, 1); // Gold color for grain
+		this.lumberCard = createResourceCard("lumber.png", LUMBER, 3); // Green color for lumber
+		this.oreCard = createResourceCard("ore.png", ORE, 0); // Gray color for ore
+		this.woolCard = createResourceCard("wool.png", WOOL, 1); // Beige color for wool
 
 		resourceBox.getChildren().addAll(brickCard.getResourceCard(), grainCard.getResourceCard(), lumberCard.getResourceCard(), oreCard.getResourceCard(), woolCard.getResourceCard());
 		return resourceBox;

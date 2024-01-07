@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResourceCard {
-	private VBox resourceCard;
+	private VBox resourceCard = new VBox();
 	private Resource resource;
 	private ImageView resourceImage;
 	private final int SIZE = 50;

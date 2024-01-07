@@ -5,6 +5,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.SettlementCor
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.Tile;
 import javafx.scene.layout.Pane;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,13 @@ public class CornerService {
 	private final List<SettlementCorner> settlementCorners = new ArrayList<>();
 	// 19 tiles, 54 corners
 	private final int[][] cornerTileMatrix = new int[19][54];
+
+	private final ResourceBoxService resourceBoxService;
+
+	@Autowired
+	public CornerService(ResourceBoxService resourceBoxService) {
+		this.resourceBoxService = resourceBoxService;
+	}
 
 	public void disableAllSettlementCornerButtons() {
 		for (SettlementCorner settlementCorner : this.settlementCorners) {
@@ -88,7 +96,7 @@ public class CornerService {
 
 	private SettlementCorner createSettlementButton(Point point, List<Tile> tiles, Pane tileMap) {
 		List<Integer> adjacentTileIds = getAdjacentTileIdsOfCorner(point, tiles, tileMap);
-		SettlementCorner settlementCorner = new SettlementCorner(SettlementCorner.cornerId++, point, adjacentTileIds, tileMap);
+		SettlementCorner settlementCorner = new SettlementCorner(SettlementCorner.cornerId++, point, adjacentTileIds, tileMap, resourceBoxService);
 		tileMap.getChildren().add(settlementCorner.getButton());
 		return settlementCorner;
 	}
