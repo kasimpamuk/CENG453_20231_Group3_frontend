@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.menu;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen.GameScreenService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -59,7 +60,8 @@ public class MenuService {
 			// change scene
 			this.gameScreenService.displayGameScreen();
 			Stage stage = (Stage) this.pane.getScene().getWindow();
-			stage.setTitle("Catan Board");
+			int playerNo = ClientInfo.playerId % 4;
+			stage.setTitle("Player: " + playerNo + "(" + ClientInfo.playerColor + ") - Game: " + ClientInfo.gameId);
 			stage.setScene(gameScreenService.getCatanScene());
 		});
 		btPlay.setDisable(true);

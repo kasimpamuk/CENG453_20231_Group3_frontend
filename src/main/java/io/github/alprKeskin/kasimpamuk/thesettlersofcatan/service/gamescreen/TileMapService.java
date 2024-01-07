@@ -43,19 +43,15 @@ public class TileMapService {
 		this.cornerService.getSettlementCorners().clear();
 	}
 
-	public void enableAllSettlementCornerButtons() {
+	public void enableAllButtons() {
 		this.cornerService.enableAllSettlementCornerButtons();
-	}
-
-	public void disableAllSettlementCornerButtons() {
-		this.cornerService.disableAllSettlementCornerButtons();
-	}
-
-	public void enableAllRoadEdgeButtons() {
 		this.edgeService.enableAllEdgeButtons();
 	}
 
-	public void disableAllRoadEdgeButtons() {
+	public void disableAllButtons() {
+		this.cornerService.disableAllSettlementCornerButtons();
 		this.edgeService.disableAllEdgeButtons();
 	}
+
+
 }

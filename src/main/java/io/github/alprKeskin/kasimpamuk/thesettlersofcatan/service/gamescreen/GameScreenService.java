@@ -30,9 +30,9 @@ public class GameScreenService {
 	private final int HEIGHT = 750;
 	private final Point BOARD_CENTER = new Point((double) WIDTH / 2, (double) HEIGHT / 2);
 	@Getter
-	private BorderPane boardPane;
+	private final BorderPane boardPane = new BorderPane();;
 	@Getter
-	private Scene catanScene;
+	private final Scene catanScene = new Scene(boardPane, WIDTH, HEIGHT);
 	private Button endTurnButton;
 
 	private final TileMapService tileMapService;
@@ -55,9 +55,8 @@ public class GameScreenService {
 
 	public void displayGameScreen() {
 		this.setClientInitialGameData();
-		this.boardPane = new BorderPane();
-		this.tileMapService.resetTileMap();
-		this.catanScene = new Scene(this.boardPane, WIDTH, HEIGHT);
+
+		//this.tileMapService.resetTileMap();
 		this.boardPane.setStyle("-fx-background-color: #87CEEB;");
 		this.boardPane.setCenter(this.tileMapService.getTileMap());
 
@@ -77,13 +76,11 @@ public class GameScreenService {
 	}
 
 	private void disableAllButtons() {
-		this.tileMapService.disableAllSettlementCornerButtons();
-		this.tileMapService.disableAllRoadEdgeButtons();
+		this.tileMapService.disableAllButtons();
 	}
 
 	private void enableAllButtons() {
-		this.tileMapService.enableAllSettlementCornerButtons();
-		this.tileMapService.enableAllRoadEdgeButtons();
+		this.tileMapService.enableAllButtons();
 	}
 
 	private ResponseDTO getGameData() {
@@ -107,7 +104,8 @@ public class GameScreenService {
 			// This will be executed on the JavaFX Application Thread
 			ResponseDTO response = pollingTask.getValue();
 			if (response.getResponseType() == ResponseType.YOUR_TURN) {
-				enableAllButtons();
+				diceBoxService.getButton().setDisable(false);
+				//enableAllButtons();
 				this.bottomConsoleService.disappearWaitingIcon(bottomConsoleService.getVbox());
 				endTurnButton = new Button("End Turn");
 				endTurnButton.setOnAction(e -> {

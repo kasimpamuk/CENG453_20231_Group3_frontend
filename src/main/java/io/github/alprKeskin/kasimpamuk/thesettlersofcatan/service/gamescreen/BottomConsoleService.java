@@ -68,4 +68,12 @@ public class BottomConsoleService {
 		return waitGif;
 	}
 
+	public void disableDiceButton() {
+		this.diceBoxService.getButton().setDisable(true);
+	}
+
+	public void enableDiceButton() {
+		this.diceBoxService.getButton().setDisable(false);
+	}
+
 }
