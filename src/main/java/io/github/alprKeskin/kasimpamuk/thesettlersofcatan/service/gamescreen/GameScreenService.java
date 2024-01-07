@@ -43,15 +43,17 @@ public class GameScreenService {
 
 	private final CornerService cornerService;
 	private final EdgeService edgeService;
+	private final ResourceBoxService resourceBoxService;
 
 	@Autowired
-	public GameScreenService(TileMapService tileMapService, BottomConsoleService bottomConsoleService, CatanRestService catanRestService, DiceBoxService diceBoxService, CornerService cornerService, EdgeService edgeService) {
+	public GameScreenService(TileMapService tileMapService, BottomConsoleService bottomConsoleService, CatanRestService catanRestService, DiceBoxService diceBoxService, CornerService cornerService, EdgeService edgeService, ResourceBoxService resourceBoxService) {
 		this.tileMapService = tileMapService;
 		this.bottomConsoleService = bottomConsoleService;
 		this.catanRestService = catanRestService;
 		this.diceBoxService = diceBoxService;
 		this.cornerService = cornerService;
 		this.edgeService = edgeService;
+		this.resourceBoxService = resourceBoxService;
 	}
 
 	public void displayGameScreen() {
@@ -109,6 +111,9 @@ public class GameScreenService {
 			// This will be executed on the JavaFX Application Thread
 			ResponseDTO response = pollingTask.getValue();
 			if (response.getResponseType() == ResponseType.YOUR_TURN) {
+				// TEST
+				this.resourceBoxService.distributeTurnResources();
+				// TEST
 				diceBoxService.getButton().setDisable(false);
 				//enableAllButtons();
 				this.bottomConsoleService.disappearWaitingIcon(bottomConsoleService.getVbox());

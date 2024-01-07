@@ -1,6 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.gamescreen;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.ui.enums.Resource;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.util.ClientInfo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -45,6 +46,29 @@ public class ResourceBoxService {
 
 		resourceBox.getChildren().addAll(brickCard.getResourceCard(), grainCard.getResourceCard(), lumberCard.getResourceCard(), oreCard.getResourceCard(), woolCard.getResourceCard());
 		return resourceBox;
+	}
+
+	public void distributeTurnResources() {
+		int INCREASE_AMOUNT = 4;
+		int bricks = ClientInfo.myResourceInfo.getBrickAmount();
+		int lumbers = ClientInfo.myResourceInfo.getLumberAmount();
+		int wools = ClientInfo.myResourceInfo.getWoolAmount();
+		int ores = ClientInfo.myResourceInfo.getOreAmount();
+		int grains = ClientInfo.myResourceInfo.getGrainAmount();
+
+		ClientInfo.myResourceInfo.setBrickAmount(bricks + INCREASE_AMOUNT);
+		ClientInfo.myResourceInfo.setLumberAmount(lumbers + INCREASE_AMOUNT);
+		ClientInfo.myResourceInfo.setWoolAmount(wools + INCREASE_AMOUNT);
+		ClientInfo.myResourceInfo.setOreAmount(ores + INCREASE_AMOUNT);
+		ClientInfo.myResourceInfo.setGrainAmount(grains + INCREASE_AMOUNT);
+
+		this.brickCard.increaseCount(INCREASE_AMOUNT);
+		this.lumberCard.increaseCount(INCREASE_AMOUNT);
+		this.woolCard.increaseCount(INCREASE_AMOUNT);
+		this.oreCard.increaseCount(INCREASE_AMOUNT);
+		this.grainCard.increaseCount(INCREASE_AMOUNT);
+
+		return;
 	}
 
 	private ResourceCard createResourceCard(String imagePath, Resource resource, int initialCount) {
